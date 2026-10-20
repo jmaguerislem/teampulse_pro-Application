@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 
 import '../../core/app_colors.dart';
 import '../../core/auth_service.dart';
+import '../../core/project_ui.dart';
 import '../../core/user_session.dart';
+import '../../l10n/app_localizations.dart';
 import '../../widgets/primary_button.dart';
 
 class ChangePasswordScreen extends StatefulWidget {
@@ -52,6 +54,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
   );
 
   void _save() {
+    final l = AppLocalizations.of(context)!;
     setState(() => _error = null);
     if (!_formKey.currentState!.validate()) return;
 
@@ -61,24 +64,23 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
       newPassword: _new.text,
     );
     if (error != null) {
-      setState(() => _error = error);
+      setState(() => _error = authErrorText(error, l));
       return;
     }
 
     ScaffoldMessenger.of(context)
-        .showSnackBar(const SnackBar(content: Text('Mot de passe modifié.')));
+        .showSnackBar(SnackBar(content: Text(l.passwordChanged)));
     Navigator.pop(context);
   }
 
   @override
   Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context)!;
+
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-
         title: Text(
-          'Mot de passe',
+          l.passwordItem,
           style: Theme.of(context).textTheme.titleLarge,
         ),
       ),
@@ -89,32 +91,28 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _label('Ancien mot de passe'),
+              _label(l.oldPasswordLabel),
               TextFormField(
                 controller: _old,
                 obscureText: _hide,
-                decoration: _deco('Votre mot de passe actuel'),
-                validator: (v) => (v == null || v.isEmpty)
-                    ? 'Entrez votre ancien mot de passe.'
-                    : null,
+                decoration: _deco(l.oldPasswordHint),
+                validator: (v) =>
+                    (v == null || v.isEmpty) ? l.enterOldPassword : null,
               ),
-              _label('Nouveau mot de passe'),
+              _label(l.newPasswordLabel),
               TextFormField(
                 controller: _new,
                 obscureText: _hide,
-                decoration: _deco('Minimum 8 caractères'),
-                validator: (v) => (v == null || v.length < 8)
-                    ? 'Minimum 8 caractères.'
-                    : null,
+                decoration: _deco(l.passwordMinHint),
+                validator: (v) =>
+                    (v == null || v.length < 8) ? l.passwordMinError : null,
               ),
-              _label('Confirmer le nouveau mot de passe'),
+              _label(l.confirmPasswordLabel),
               TextFormField(
                 controller: _confirm,
                 obscureText: _hide,
-                decoration: _deco('Répétez le mot de passe'),
-                validator: (v) => v != _new.text
-                    ? 'Les mots de passe ne correspondent pas.'
-                    : null,
+                decoration: _deco(l.confirmPasswordHint),
+                validator: (v) => v != _new.text ? l.passwordsDontMatch : null,
               ),
               if (_error != null) ...[
                 const SizedBox(height: 16),
@@ -128,7 +126,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                 ),
               ],
               const SizedBox(height: 28),
-              PrimaryButton(label: 'Modifier', onPressed: _save),
+              PrimaryButton(label: l.changePasswordButton, onPressed: _save),
               const SizedBox(height: 32),
             ],
           ),

@@ -7,6 +7,7 @@ import '../l10n/app_localizations.dart';
 import '../widgets/primary_button.dart';
 import 'login_screen.dart';
 import 'main_shell.dart';
+import '../core/project_ui.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -54,7 +55,9 @@ class _SignupScreenState extends State<SignupScreen> {
     );
 
     if (error != null) {
-      setState(() => _error = error);
+      setState(
+        () => _error = authErrorText(error, AppLocalizations.of(context)!),
+      );
       return;
     }
 

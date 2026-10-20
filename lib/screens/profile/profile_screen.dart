@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../../core/app_colors.dart';
 import '../../core/settings_state.dart';
 import '../../core/user_session.dart';
+import '../../l10n/app_localizations.dart';
 import '../welcome_screen.dart';
 import 'appearance_screen.dart';
 import 'change_password_screen.dart';
@@ -26,21 +27,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   Future<void> _logout() async {
+    final l = AppLocalizations.of(context)!;
     final ok = await showDialog<bool>(
       context: context,
       builder: (ctx) => AlertDialog(
-        title: const Text('Se déconnecter ?'),
-        content: const Text('Vous reviendrez à l\'écran d\'accueil.'),
+        title: Text(l.logoutTitle),
+        content: Text(l.logoutBody),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(ctx, false),
-            child: const Text('Annuler'),
+            child: Text(l.cancel),
           ),
           TextButton(
             onPressed: () => Navigator.pop(ctx, true),
-            child: const Text(
-              'Se déconnecter',
-              style: TextStyle(color: AppColors.coral),
+            child: Text(
+              l.logoutConfirm,
+              style: const TextStyle(color: AppColors.coral),
             ),
           ),
         ],
@@ -103,19 +105,31 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     final settings = context.watch<SettingsState>();
+    final l = AppLocalizations.of(context)!;
     final name = UserSession.fullName.isEmpty
-        ? 'Utilisateur'
+        ? l.defaultUserName
         : UserSession.fullName;
-    final email = UserSession.email.isEmpty
-        ? 'Aucun e-mail'
-        : UserSession.email;
+    final email = UserSession.email.isEmpty ? l.noEmail : UserSession.email;
+
+    final notifSummary = settings.activeNotifCount == 3
+        ? l.notifSummaryAll
+        : settings.activeNotifCount == 0
+        ? l.notifSummaryNone
+        : (settings.activeNotifCount == 1 && settings.notifOverdue)
+        ? l.notifSummaryOverdue
+        : l.notifSummaryCount(settings.activeNotifCount);
+    final themeLabel = settings.themeMode == ThemeMode.light
+        ? l.themeLight
+        : settings.themeMode == ThemeMode.dark
+        ? l.themeDark
+        : l.themeSystem;
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-
-        title: Text('Profil', style: Theme.of(context).textTheme.titleLarge),
+        title: Text(
+          l.profileTitle,
+          style: Theme.of(context).textTheme.titleLarge,
+        ),
       ),
       body: ListView(
         padding: const EdgeInsets.fromLTRB(20, 8, 20, 32),
@@ -178,9 +192,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           color: AppColors.primary.withValues(alpha: 0.12),
                           borderRadius: BorderRadius.circular(12),
                         ),
-                        child: const Text(
-                          'Cheffe de projet',
-                          style: TextStyle(
+                        child: Text(
+                          l.projectLead,
+                          style: const TextStyle(
                             color: AppColors.primary,
                             fontWeight: FontWeight.w700,
                             fontSize: 10,
@@ -193,30 +207,27 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ],
             ),
           ),
+          _item(l.personalInfo, onTap: () => _open(const EditProfileScreen())),
           _item(
-            'Informations personnelles',
-            onTap: () => _open(const EditProfileScreen()),
-          ),
-          _item(
-            'Mot de passe',
+            l.passwordItem,
             onTap: () => _open(const ChangePasswordScreen()),
           ),
           _item(
-            'Préférences de notifications',
-            value: settings.notifSummary,
+            l.notifPrefsItem,
+            value: notifSummary,
             onTap: () => _open(const NotificationPrefsScreen()),
           ),
           _item(
-            'Langue',
+            l.languageItem,
             value: settings.language,
             onTap: () => _open(const LanguageScreen()),
           ),
           _item(
-            'Apparence',
-            value: settings.themeLabel,
+            l.appearanceItem,
+            value: themeLabel,
             onTap: () => _open(const AppearanceScreen()),
           ),
-          _item('Aide et support', onTap: () => _open(const HelpScreen())),
+          _item(l.helpItem, onTap: () => _open(const HelpScreen())),
           const SizedBox(height: 10),
           GestureDetector(
             onTap: _logout,
@@ -226,10 +237,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(20),
               ),
-              child: const Center(
+              child: Center(
                 child: Text(
-                  'Déconnexion',
-                  style: TextStyle(
+                  l.logout,
+                  style: const TextStyle(
                     color: AppColors.coral,
                     fontWeight: FontWeight.w800,
                     fontSize: 15,

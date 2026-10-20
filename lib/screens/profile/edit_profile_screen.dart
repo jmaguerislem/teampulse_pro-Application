@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 
 import '../../core/app_colors.dart';
 import '../../core/auth_service.dart';
+import '../../core/project_ui.dart';
 import '../../core/user_session.dart';
+import '../../l10n/app_localizations.dart';
 import '../../widgets/primary_button.dart';
 
 class EditProfileScreen extends StatefulWidget {
@@ -45,6 +47,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   );
 
   void _save() {
+    final l = AppLocalizations.of(context)!;
     setState(() => _error = null);
     if (!_formKey.currentState!.validate()) return;
 
@@ -54,26 +57,25 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       newEmail: _email.text,
     );
     if (error != null) {
-      setState(() => _error = error);
+      setState(() => _error = authErrorText(error, l));
       return;
     }
 
     UserSession.fullName = _name.text.trim();
     UserSession.email = _email.text.trim().toLowerCase();
     ScaffoldMessenger.of(context)
-        .showSnackBar(const SnackBar(content: Text('Profil mis à jour.')));
+        .showSnackBar(SnackBar(content: Text(l.profileUpdated)));
     Navigator.pop(context);
   }
 
   @override
   Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context)!;
+
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-
         title: Text(
-          'Informations personnelles',
+          l.personalInfo,
           style: Theme.of(context).textTheme.titleLarge,
         ),
       ),
@@ -84,29 +86,22 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _label('Nom complet'),
+              _label(l.fullNameLabel),
               TextFormField(
                 controller: _name,
                 textCapitalization: TextCapitalization.words,
-                decoration: const InputDecoration(hintText: 'Ex : Aya Jguirim'),
-                validator: (v) => (v == null || v.trim().isEmpty)
-                    ? 'Entrez votre nom complet.'
-                    : null,
+                decoration: InputDecoration(hintText: l.fullNameHint),
+                validator: (v) =>
+                    (v == null || v.trim().isEmpty) ? l.enterFullName : null,
               ),
-              _label('Adresse e-mail'),
+              _label(l.emailLabel),
               TextFormField(
                 controller: _email,
                 keyboardType: TextInputType.emailAddress,
-                decoration: const InputDecoration(
-                  hintText: 'exemple@domaine.com',
-                ),
+                decoration: InputDecoration(hintText: l.emailHint),
                 validator: (v) {
-                  if (v == null || v.trim().isEmpty) {
-                    return 'Entrez votre e-mail.';
-                  }
-                  if (!AuthService.isValidEmail(v)) {
-                    return 'Format d\'e-mail invalide.';
-                  }
+                  if (v == null || v.trim().isEmpty) return l.enterEmail;
+                  if (!AuthService.isValidEmail(v)) return l.invalidEmail;
                   return null;
                 },
               ),
@@ -122,7 +117,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 ),
               ],
               const SizedBox(height: 28),
-              PrimaryButton(label: 'Enregistrer', onPressed: _save),
+              PrimaryButton(label: l.save, onPressed: _save),
               const SizedBox(height: 32),
             ],
           ),

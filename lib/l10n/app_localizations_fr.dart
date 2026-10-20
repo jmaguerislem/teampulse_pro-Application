@@ -639,4 +639,170 @@ class AppLocalizationsFr extends AppLocalizations {
   String durationMinutes(int minutes) {
     return '$minutes min';
   }
+
+  @override
+  String get profileTitle => 'Profil';
+
+  @override
+  String get defaultUserName => 'Utilisateur';
+
+  @override
+  String get noEmail => 'Aucun e-mail';
+
+  @override
+  String get personalInfo => 'Informations personnelles';
+
+  @override
+  String get passwordItem => 'Mot de passe';
+
+  @override
+  String get notifPrefsItem => 'Préférences de notifications';
+
+  @override
+  String get languageItem => 'Langue';
+
+  @override
+  String get appearanceItem => 'Apparence';
+
+  @override
+  String get helpItem => 'Aide et support';
+
+  @override
+  String get logout => 'Déconnexion';
+
+  @override
+  String get logoutTitle => 'Se déconnecter ?';
+
+  @override
+  String get logoutBody => 'Vous reviendrez à l’écran d’accueil.';
+
+  @override
+  String get logoutConfirm => 'Se déconnecter';
+
+  @override
+  String get save => 'Enregistrer';
+
+  @override
+  String get profileUpdated => 'Profil mis à jour.';
+
+  @override
+  String get accountNotFound => 'Compte introuvable.';
+
+  @override
+  String get emailAlreadyUsed => 'Cet e-mail est déjà utilisé.';
+
+  @override
+  String get accountExists => 'Un compte existe déjà avec cet e-mail.';
+
+  @override
+  String get oldPasswordWrong => 'L’ancien mot de passe est incorrect.';
+
+  @override
+  String get oldPasswordLabel => 'Ancien mot de passe';
+
+  @override
+  String get oldPasswordHint => 'Votre mot de passe actuel';
+
+  @override
+  String get newPasswordLabel => 'Nouveau mot de passe';
+
+  @override
+  String get confirmPasswordLabel => 'Confirmer le nouveau mot de passe';
+
+  @override
+  String get confirmPasswordHint => 'Répétez le mot de passe';
+
+  @override
+  String get enterOldPassword => 'Entrez votre ancien mot de passe.';
+
+  @override
+  String get passwordsDontMatch => 'Les mots de passe ne correspondent pas.';
+
+  @override
+  String get changePasswordButton => 'Modifier';
+
+  @override
+  String get passwordChanged => 'Mot de passe modifié.';
+
+  @override
+  String get notifSummaryAll => 'Toutes les alertes';
+
+  @override
+  String get notifSummaryNone => 'Aucune alerte';
+
+  @override
+  String get notifSummaryOverdue => 'Alertes de retard';
+
+  @override
+  String notifSummaryCount(int count) {
+    return '$count sur 3 actives';
+  }
+
+  @override
+  String get prefOverdueTitle => 'Alertes de retard';
+
+  @override
+  String get prefOverdueSub => 'Tâches qui ont dépassé leur date limite';
+
+  @override
+  String get prefReminderTitle => 'Rappels d’échéance';
+
+  @override
+  String get prefReminderSub => 'Tâches à rendre dans les 2 jours';
+
+  @override
+  String get prefAssignTitle => 'Nouvelles affectations';
+
+  @override
+  String get prefAssignSub => 'Tâches assignées à un membre';
+
+  @override
+  String get languageComingSoon => 'Cette langue arrive bientôt.';
+
+  @override
+  String get comingSoonShort => 'Bientôt';
+
+  @override
+  String get themeLight => 'Clair';
+
+  @override
+  String get themeDark => 'Sombre';
+
+  @override
+  String get themeSystem => 'Système';
+
+  @override
+  String get helpTitle => 'Aide et support';
+
+  @override
+  String get faqQ1 => 'Comment créer un projet ?';
+
+  @override
+  String get faqA1 =>
+      'Ouvrez l’onglet Projets puis touchez le bouton + en bas à droite.';
+
+  @override
+  String get faqQ2 => 'Comment affecter une tâche ?';
+
+  @override
+  String get faqA2 =>
+      'Ouvrez la tâche, touchez « Assigné à » et choisissez un membre de l’équipe.';
+
+  @override
+  String get faqQ3 => 'Comment déplacer une tâche dans le Kanban ?';
+
+  @override
+  String get faqA3 =>
+      'Maintenez votre doigt sur la carte, puis glissez-la vers une autre colonne.';
+
+  @override
+  String get faqQ4 => 'Que signifie « en retard » ?';
+
+  @override
+  String get faqA4 =>
+      'Une tâche est en retard quand sa date limite est passée et qu’elle n’est pas terminée.';
+
+  @override
+  String get helpContact =>
+      'Besoin d’aide ? Écrivez-nous à support@teampulse.example';
 }

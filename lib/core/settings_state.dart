@@ -12,31 +12,14 @@ class SettingsState extends ChangeNotifier {
   bool get notifReminder => _notifReminder;
   bool get notifAssignment => _notifAssignment;
   String get language => _language;
+
   Locale get locale =>
       _language == 'English' ? const Locale('en') : const Locale('fr');
 
-  String get themeLabel {
-    switch (_themeMode) {
-      case ThemeMode.light:
-        return 'Clair';
-      case ThemeMode.dark:
-        return 'Sombre';
-      case ThemeMode.system:
-        return 'Système';
-    }
-  }
-
-  String get notifSummary {
-    final active = [
-      _notifOverdue,
-      _notifReminder,
-      _notifAssignment,
-    ].where((v) => v).length;
-    if (active == 3) return 'Toutes les alertes';
-    if (active == 0) return 'Aucune alerte';
-    if (_notifOverdue && active == 1) return 'Alertes de retard';
-    return '$active sur 3 actives';
-  }
+  int get activeNotifCount =>
+      [_notifOverdue, _notifReminder, _notifAssignment]
+          .where((v) => v)
+          .length;
 
   void setThemeMode(ThemeMode m) {
     _themeMode = m;

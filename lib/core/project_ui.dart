@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+
 import '../l10n/app_localizations.dart';
 import '../models/models.dart';
 import 'app_colors.dart';
 import 'app_state.dart';
+import 'auth_service.dart';
 
 String fmtDate(DateTime d) =>
     '${d.day.toString().padLeft(2, '0')}/${d.month.toString().padLeft(2, '0')}/${d.year}';
@@ -52,5 +54,18 @@ String taskStatusLabel(TaskStatus s, AppLocalizations l) {
       return l.filterInProgress;
     case TaskStatus.done:
       return l.taskStatusDone;
+  }
+}
+
+String authErrorText(AuthError e, AppLocalizations l) {
+  switch (e) {
+    case AuthError.accountExists:
+      return l.accountExists;
+    case AuthError.accountNotFound:
+      return l.accountNotFound;
+    case AuthError.emailInUse:
+      return l.emailAlreadyUsed;
+    case AuthError.wrongOldPassword:
+      return l.oldPasswordWrong;
   }
 }

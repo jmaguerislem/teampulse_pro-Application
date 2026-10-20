@@ -3,30 +3,31 @@ import 'package:provider/provider.dart';
 
 import '../../core/app_colors.dart';
 import '../../core/settings_state.dart';
+import '../../l10n/app_localizations.dart';
 
 class AppearanceScreen extends StatelessWidget {
   const AppearanceScreen({super.key});
 
-  static const _modes = [
-    (ThemeMode.light, 'Clair', Icons.light_mode_outlined),
-    (ThemeMode.dark, 'Sombre', Icons.dark_mode_outlined),
-    (ThemeMode.system, 'Système', Icons.phone_android),
-  ];
-
   @override
   Widget build(BuildContext context) {
     final s = context.watch<SettingsState>();
+    final l = AppLocalizations.of(context)!;
+    final modes = [
+      (ThemeMode.light, l.themeLight, Icons.light_mode_outlined),
+      (ThemeMode.dark, l.themeDark, Icons.dark_mode_outlined),
+      (ThemeMode.system, l.themeSystem, Icons.phone_android),
+    ];
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-
-        title: Text('Apparence', style: Theme.of(context).textTheme.titleLarge),
+        title: Text(
+          l.appearanceItem,
+          style: Theme.of(context).textTheme.titleLarge,
+        ),
       ),
       body: ListView(
         padding: const EdgeInsets.fromLTRB(20, 8, 20, 32),
-        children: _modes.map((m) {
+        children: modes.map((m) {
           final (mode, label, icon) = m;
           final selected = s.themeMode == mode;
           return GestureDetector(

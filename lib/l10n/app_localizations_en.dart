@@ -637,4 +637,170 @@ class AppLocalizationsEn extends AppLocalizations {
   String durationMinutes(int minutes) {
     return '$minutes min';
   }
+
+  @override
+  String get profileTitle => 'Profile';
+
+  @override
+  String get defaultUserName => 'User';
+
+  @override
+  String get noEmail => 'No email';
+
+  @override
+  String get personalInfo => 'Personal information';
+
+  @override
+  String get passwordItem => 'Password';
+
+  @override
+  String get notifPrefsItem => 'Notification preferences';
+
+  @override
+  String get languageItem => 'Language';
+
+  @override
+  String get appearanceItem => 'Appearance';
+
+  @override
+  String get helpItem => 'Help and support';
+
+  @override
+  String get logout => 'Log out';
+
+  @override
+  String get logoutTitle => 'Log out?';
+
+  @override
+  String get logoutBody => 'You will return to the welcome screen.';
+
+  @override
+  String get logoutConfirm => 'Log out';
+
+  @override
+  String get save => 'Save';
+
+  @override
+  String get profileUpdated => 'Profile updated.';
+
+  @override
+  String get accountNotFound => 'Account not found.';
+
+  @override
+  String get emailAlreadyUsed => 'This email is already in use.';
+
+  @override
+  String get accountExists => 'An account already exists with this email.';
+
+  @override
+  String get oldPasswordWrong => 'The old password is incorrect.';
+
+  @override
+  String get oldPasswordLabel => 'Old password';
+
+  @override
+  String get oldPasswordHint => 'Your current password';
+
+  @override
+  String get newPasswordLabel => 'New password';
+
+  @override
+  String get confirmPasswordLabel => 'Confirm new password';
+
+  @override
+  String get confirmPasswordHint => 'Repeat the password';
+
+  @override
+  String get enterOldPassword => 'Enter your old password.';
+
+  @override
+  String get passwordsDontMatch => 'Passwords do not match.';
+
+  @override
+  String get changePasswordButton => 'Change';
+
+  @override
+  String get passwordChanged => 'Password changed.';
+
+  @override
+  String get notifSummaryAll => 'All alerts';
+
+  @override
+  String get notifSummaryNone => 'No alerts';
+
+  @override
+  String get notifSummaryOverdue => 'Overdue alerts';
+
+  @override
+  String notifSummaryCount(int count) {
+    return '$count of 3 active';
+  }
+
+  @override
+  String get prefOverdueTitle => 'Overdue alerts';
+
+  @override
+  String get prefOverdueSub => 'Tasks past their deadline';
+
+  @override
+  String get prefReminderTitle => 'Deadline reminders';
+
+  @override
+  String get prefReminderSub => 'Tasks due within 2 days';
+
+  @override
+  String get prefAssignTitle => 'New assignments';
+
+  @override
+  String get prefAssignSub => 'Tasks assigned to a member';
+
+  @override
+  String get languageComingSoon => 'This language is coming soon.';
+
+  @override
+  String get comingSoonShort => 'Soon';
+
+  @override
+  String get themeLight => 'Light';
+
+  @override
+  String get themeDark => 'Dark';
+
+  @override
+  String get themeSystem => 'System';
+
+  @override
+  String get helpTitle => 'Help and support';
+
+  @override
+  String get faqQ1 => 'How do I create a project?';
+
+  @override
+  String get faqA1 =>
+      'Open the Projects tab, then tap the + button at the bottom right.';
+
+  @override
+  String get faqQ2 => 'How do I assign a task?';
+
+  @override
+  String get faqA2 =>
+      'Open the task, tap “Assigned to” and choose a team member.';
+
+  @override
+  String get faqQ3 => 'How do I move a task in the Kanban board?';
+
+  @override
+  String get faqA3 =>
+      'Press and hold the card, then drag it to another column.';
+
+  @override
+  String get faqQ4 => 'What does “overdue” mean?';
+
+  @override
+  String get faqA4 =>
+      'A task is overdue when its deadline has passed and it is not completed.';
+
+  @override
+  String get helpContact =>
+      'Need help? Write to us at support@teampulse.example';
 }

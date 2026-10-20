@@ -10,9 +10,9 @@ class Account {
   });
 }
 
-/// Gère les comptes EN MÉMOIRE (temporaire).
-/// Plus tard, chaque méthode appellera l'API + PostgreSQL
-/// (le mot de passe sera haché côté serveur, jamais stocké en clair).
+enum AuthError { accountExists, accountNotFound, emailInUse, wrongOldPassword }
+
+/// Comptes EN MÉMOIRE (temporaire). Plus tard : API + PostgreSQL.
 class AuthService {
   static final List<Account> _accounts = [];
 
@@ -22,16 +22,13 @@ class AuthService {
     return RegExp(r'^[^@\s]+@[^@\s]+\.[^@\s]+$').hasMatch(email.trim());
   }
 
-  /// Retourne null si OK, sinon un message d'erreur.
-  static String? register({
+  static AuthError? register({
     required String fullName,
     required String email,
     required String password,
   }) {
     final e = _norm(email);
-    if (_accounts.any((a) => a.email == e)) {
-      return 'Un compte existe déjà avec cet e-mail.';
-    }
+    if (_accounts.any((a) => a.email == e)) return AuthError.accountExists;
     _accounts.add(
       Account(fullName: fullName.trim(), email: e, password: password),
     );
@@ -54,34 +51,30 @@ class AuthService {
     return null;
   }
 
-  /// Met à jour nom et e-mail. Retourne null si OK, sinon un message d'erreur.
-  static String? updateProfile({
+  static AuthError? updateProfile({
     required String currentEmail,
     required String newName,
     required String newEmail,
   }) {
     final acc = _byEmail(currentEmail);
-    if (acc == null) return 'Compte introuvable.';
+    if (acc == null) return AuthError.accountNotFound;
     final e = _norm(newEmail);
     if (e != acc.email && _accounts.any((a) => a.email == e)) {
-      return 'Cet e-mail est déjà utilisé.';
+      return AuthError.emailInUse;
     }
     acc.fullName = newName.trim();
     acc.email = e;
     return null;
   }
 
-  /// Retourne null si OK, sinon un message d'erreur.
-  static String? changePassword({
+  static AuthError? changePassword({
     required String email,
     required String oldPassword,
     required String newPassword,
   }) {
     final acc = _byEmail(email);
-    if (acc == null) return 'Compte introuvable.';
-    if (acc.password != oldPassword) {
-      return 'L\'ancien mot de passe est incorrect.';
-    }
+    if (acc == null) return AuthError.accountNotFound;
+    if (acc.password != oldPassword) return AuthError.wrongOldPassword;
     acc.password = newPassword;
     return null;
   }

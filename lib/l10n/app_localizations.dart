@@ -1201,6 +1201,324 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'{minutes} min'**
   String durationMinutes(int minutes);
+
+  /// No description provided for @profileTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Profil'**
+  String get profileTitle;
+
+  /// No description provided for @defaultUserName.
+  ///
+  /// In fr, this message translates to:
+  /// **'Utilisateur'**
+  String get defaultUserName;
+
+  /// No description provided for @noEmail.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucun e-mail'**
+  String get noEmail;
+
+  /// No description provided for @personalInfo.
+  ///
+  /// In fr, this message translates to:
+  /// **'Informations personnelles'**
+  String get personalInfo;
+
+  /// No description provided for @passwordItem.
+  ///
+  /// In fr, this message translates to:
+  /// **'Mot de passe'**
+  String get passwordItem;
+
+  /// No description provided for @notifPrefsItem.
+  ///
+  /// In fr, this message translates to:
+  /// **'Préférences de notifications'**
+  String get notifPrefsItem;
+
+  /// No description provided for @languageItem.
+  ///
+  /// In fr, this message translates to:
+  /// **'Langue'**
+  String get languageItem;
+
+  /// No description provided for @appearanceItem.
+  ///
+  /// In fr, this message translates to:
+  /// **'Apparence'**
+  String get appearanceItem;
+
+  /// No description provided for @helpItem.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aide et support'**
+  String get helpItem;
+
+  /// No description provided for @logout.
+  ///
+  /// In fr, this message translates to:
+  /// **'Déconnexion'**
+  String get logout;
+
+  /// No description provided for @logoutTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Se déconnecter ?'**
+  String get logoutTitle;
+
+  /// No description provided for @logoutBody.
+  ///
+  /// In fr, this message translates to:
+  /// **'Vous reviendrez à l’écran d’accueil.'**
+  String get logoutBody;
+
+  /// No description provided for @logoutConfirm.
+  ///
+  /// In fr, this message translates to:
+  /// **'Se déconnecter'**
+  String get logoutConfirm;
+
+  /// No description provided for @save.
+  ///
+  /// In fr, this message translates to:
+  /// **'Enregistrer'**
+  String get save;
+
+  /// No description provided for @profileUpdated.
+  ///
+  /// In fr, this message translates to:
+  /// **'Profil mis à jour.'**
+  String get profileUpdated;
+
+  /// No description provided for @accountNotFound.
+  ///
+  /// In fr, this message translates to:
+  /// **'Compte introuvable.'**
+  String get accountNotFound;
+
+  /// No description provided for @emailAlreadyUsed.
+  ///
+  /// In fr, this message translates to:
+  /// **'Cet e-mail est déjà utilisé.'**
+  String get emailAlreadyUsed;
+
+  /// No description provided for @accountExists.
+  ///
+  /// In fr, this message translates to:
+  /// **'Un compte existe déjà avec cet e-mail.'**
+  String get accountExists;
+
+  /// No description provided for @oldPasswordWrong.
+  ///
+  /// In fr, this message translates to:
+  /// **'L’ancien mot de passe est incorrect.'**
+  String get oldPasswordWrong;
+
+  /// No description provided for @oldPasswordLabel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ancien mot de passe'**
+  String get oldPasswordLabel;
+
+  /// No description provided for @oldPasswordHint.
+  ///
+  /// In fr, this message translates to:
+  /// **'Votre mot de passe actuel'**
+  String get oldPasswordHint;
+
+  /// No description provided for @newPasswordLabel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Nouveau mot de passe'**
+  String get newPasswordLabel;
+
+  /// No description provided for @confirmPasswordLabel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Confirmer le nouveau mot de passe'**
+  String get confirmPasswordLabel;
+
+  /// No description provided for @confirmPasswordHint.
+  ///
+  /// In fr, this message translates to:
+  /// **'Répétez le mot de passe'**
+  String get confirmPasswordHint;
+
+  /// No description provided for @enterOldPassword.
+  ///
+  /// In fr, this message translates to:
+  /// **'Entrez votre ancien mot de passe.'**
+  String get enterOldPassword;
+
+  /// No description provided for @passwordsDontMatch.
+  ///
+  /// In fr, this message translates to:
+  /// **'Les mots de passe ne correspondent pas.'**
+  String get passwordsDontMatch;
+
+  /// No description provided for @changePasswordButton.
+  ///
+  /// In fr, this message translates to:
+  /// **'Modifier'**
+  String get changePasswordButton;
+
+  /// No description provided for @passwordChanged.
+  ///
+  /// In fr, this message translates to:
+  /// **'Mot de passe modifié.'**
+  String get passwordChanged;
+
+  /// No description provided for @notifSummaryAll.
+  ///
+  /// In fr, this message translates to:
+  /// **'Toutes les alertes'**
+  String get notifSummaryAll;
+
+  /// No description provided for @notifSummaryNone.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucune alerte'**
+  String get notifSummaryNone;
+
+  /// No description provided for @notifSummaryOverdue.
+  ///
+  /// In fr, this message translates to:
+  /// **'Alertes de retard'**
+  String get notifSummaryOverdue;
+
+  /// No description provided for @notifSummaryCount.
+  ///
+  /// In fr, this message translates to:
+  /// **'{count} sur 3 actives'**
+  String notifSummaryCount(int count);
+
+  /// No description provided for @prefOverdueTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Alertes de retard'**
+  String get prefOverdueTitle;
+
+  /// No description provided for @prefOverdueSub.
+  ///
+  /// In fr, this message translates to:
+  /// **'Tâches qui ont dépassé leur date limite'**
+  String get prefOverdueSub;
+
+  /// No description provided for @prefReminderTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Rappels d’échéance'**
+  String get prefReminderTitle;
+
+  /// No description provided for @prefReminderSub.
+  ///
+  /// In fr, this message translates to:
+  /// **'Tâches à rendre dans les 2 jours'**
+  String get prefReminderSub;
+
+  /// No description provided for @prefAssignTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Nouvelles affectations'**
+  String get prefAssignTitle;
+
+  /// No description provided for @prefAssignSub.
+  ///
+  /// In fr, this message translates to:
+  /// **'Tâches assignées à un membre'**
+  String get prefAssignSub;
+
+  /// No description provided for @languageComingSoon.
+  ///
+  /// In fr, this message translates to:
+  /// **'Cette langue arrive bientôt.'**
+  String get languageComingSoon;
+
+  /// No description provided for @comingSoonShort.
+  ///
+  /// In fr, this message translates to:
+  /// **'Bientôt'**
+  String get comingSoonShort;
+
+  /// No description provided for @themeLight.
+  ///
+  /// In fr, this message translates to:
+  /// **'Clair'**
+  String get themeLight;
+
+  /// No description provided for @themeDark.
+  ///
+  /// In fr, this message translates to:
+  /// **'Sombre'**
+  String get themeDark;
+
+  /// No description provided for @themeSystem.
+  ///
+  /// In fr, this message translates to:
+  /// **'Système'**
+  String get themeSystem;
+
+  /// No description provided for @helpTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aide et support'**
+  String get helpTitle;
+
+  /// No description provided for @faqQ1.
+  ///
+  /// In fr, this message translates to:
+  /// **'Comment créer un projet ?'**
+  String get faqQ1;
+
+  /// No description provided for @faqA1.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ouvrez l’onglet Projets puis touchez le bouton + en bas à droite.'**
+  String get faqA1;
+
+  /// No description provided for @faqQ2.
+  ///
+  /// In fr, this message translates to:
+  /// **'Comment affecter une tâche ?'**
+  String get faqQ2;
+
+  /// No description provided for @faqA2.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ouvrez la tâche, touchez « Assigné à » et choisissez un membre de l’équipe.'**
+  String get faqA2;
+
+  /// No description provided for @faqQ3.
+  ///
+  /// In fr, this message translates to:
+  /// **'Comment déplacer une tâche dans le Kanban ?'**
+  String get faqQ3;
+
+  /// No description provided for @faqA3.
+  ///
+  /// In fr, this message translates to:
+  /// **'Maintenez votre doigt sur la carte, puis glissez-la vers une autre colonne.'**
+  String get faqA3;
+
+  /// No description provided for @faqQ4.
+  ///
+  /// In fr, this message translates to:
+  /// **'Que signifie « en retard » ?'**
+  String get faqQ4;
+
+  /// No description provided for @faqA4.
+  ///
+  /// In fr, this message translates to:
+  /// **'Une tâche est en retard quand sa date limite est passée et qu’elle n’est pas terminée.'**
+  String get faqA4;
+
+  /// No description provided for @helpContact.
+  ///
+  /// In fr, this message translates to:
+  /// **'Besoin d’aide ? Écrivez-nous à support@teampulse.example'**
+  String get helpContact;
 }
 
 class _AppLocalizationsDelegate

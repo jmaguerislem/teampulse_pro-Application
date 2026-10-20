@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../../core/app_colors.dart';
 import '../../core/settings_state.dart';
+import '../../l10n/app_localizations.dart';
 
 class NotificationPrefsScreen extends StatelessWidget {
   const NotificationPrefsScreen({super.key});
@@ -45,14 +46,12 @@ class NotificationPrefsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final s = context.watch<SettingsState>();
     final read = context.read<SettingsState>();
+    final l = AppLocalizations.of(context)!;
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-
         title: Text(
-          'Préférences de notifications',
+          l.notifPrefsItem,
           style: Theme.of(context).textTheme.titleLarge,
         ),
       ),
@@ -60,20 +59,20 @@ class NotificationPrefsScreen extends StatelessWidget {
         padding: const EdgeInsets.fromLTRB(20, 8, 20, 32),
         children: [
           _switch(
-            'Alertes de retard',
-            'Tâches qui ont dépassé leur date limite',
+            l.prefOverdueTitle,
+            l.prefOverdueSub,
             s.notifOverdue,
             read.setNotifOverdue,
           ),
           _switch(
-            'Rappels d\'échéance',
-            'Tâches à rendre dans les 2 jours',
+            l.prefReminderTitle,
+            l.prefReminderSub,
             s.notifReminder,
             read.setNotifReminder,
           ),
           _switch(
-            'Nouvelles affectations',
-            'Tâches assignées à un membre',
+            l.prefAssignTitle,
+            l.prefAssignSub,
             s.notifAssignment,
             read.setNotifAssignment,
           ),
