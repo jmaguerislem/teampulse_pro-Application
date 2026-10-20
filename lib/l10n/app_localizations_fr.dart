@@ -479,4 +479,164 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get noDeadlineThatDay => 'Aucune échéance ce jour-là.';
+
+  @override
+  String get moreTitle => 'Plus';
+
+  @override
+  String get notificationsTitle => 'Notifications';
+
+  @override
+  String get notificationsSubtitle => 'Retards, rappels et affectations';
+
+  @override
+  String get statsTile => 'Statistiques et progression';
+
+  @override
+  String get statsTileSubtitle => 'Évolution de vos tâches';
+
+  @override
+  String get reportsTile => 'Rapports';
+
+  @override
+  String get reportsTileSubtitle => 'Résumé global ou par projet';
+
+  @override
+  String get profileTile => 'Profil et paramètres';
+
+  @override
+  String get profileTileSubtitle => 'Compte, notifications, apparence';
+
+  @override
+  String filterUnread(int count) {
+    return 'Non lues · $count';
+  }
+
+  @override
+  String get markAllRead => 'Tout lire';
+
+  @override
+  String get noNotifications => 'Aucune notification';
+
+  @override
+  String get notifOverdueTitle => 'Tâche en retard';
+
+  @override
+  String notifOverdueMsg(String task, int days) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: '$days jours',
+      one: '1 jour',
+    );
+    return '« $task » a $_temp0 de retard';
+  }
+
+  @override
+  String get notifReminderTitle => 'Rappel d’échéance';
+
+  @override
+  String notifReminderToday(String task) {
+    return '« $task » arrive à échéance aujourd’hui';
+  }
+
+  @override
+  String notifReminderTomorrow(String task) {
+    return '« $task » arrive à échéance demain';
+  }
+
+  @override
+  String notifReminderTwoDays(String task) {
+    return '« $task » arrive à échéance dans 2 jours';
+  }
+
+  @override
+  String get notifAssignTitle => 'Nouvelle affectation';
+
+  @override
+  String notifAssignMsg(String task, String member) {
+    return '« $task » est assignée à $member';
+  }
+
+  @override
+  String get progressTitle => 'Progression';
+
+  @override
+  String get thisWeek => 'Cette semaine';
+
+  @override
+  String get thisMonth => 'Ce mois';
+
+  @override
+  String get statInProgress => 'En cours';
+
+  @override
+  String get overdueLabel => 'En retard';
+
+  @override
+  String percentOfTasks(int percent) {
+    return '$percent % des tâches';
+  }
+
+  @override
+  String get taskEvolution => 'Évolution des tâches';
+
+  @override
+  String daysAgo(int days) {
+    return 'Il y a $days jours';
+  }
+
+  @override
+  String get legendDone => 'Terminées';
+
+  @override
+  String get legendActive => 'En cours';
+
+  @override
+  String get legendLate => 'En retard';
+
+  @override
+  String get reportsTitle => 'Rapports';
+
+  @override
+  String get tabGlobal => 'Global';
+
+  @override
+  String get tabByProject => 'Par projet';
+
+  @override
+  String get noProjectYet => 'Aucun projet pour le moment';
+
+  @override
+  String get summary => 'Résumé';
+
+  @override
+  String get totalTasks => 'Total des tâches';
+
+  @override
+  String get avgResolution => 'Temps moyen de résolution';
+
+  @override
+  String get successRate => 'Taux de réussite';
+
+  @override
+  String get exportPdf => 'Exporter en PDF';
+
+  @override
+  String get pdfSoon => 'Export PDF : bientôt disponible.';
+
+  @override
+  String durationDaysHours(int days, int hours) {
+    return '$days j $hours h';
+  }
+
+  @override
+  String durationHours(int hours) {
+    return '$hours h';
+  }
+
+  @override
+  String durationMinutes(int minutes) {
+    return '$minutes min';
+  }
 }

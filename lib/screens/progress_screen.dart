@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../core/app_colors.dart';
 import '../core/app_state.dart';
+import '../l10n/app_localizations.dart';
 
 class ProgressScreen extends StatefulWidget {
   const ProgressScreen({super.key});
@@ -65,6 +66,7 @@ class _ProgressScreenState extends State<ProgressScreen> {
   @override
   Widget build(BuildContext context) {
     final s = context.watch<AppState>();
+    final l = AppLocalizations.of(context)!;
     final series = s.statsSeries(_days);
     final latePercent = s.taskCount == 0
         ? 0
@@ -72,20 +74,17 @@ class _ProgressScreenState extends State<ProgressScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-
         title: Text(
-          'Progression',
+          l.progressTitle,
           style: Theme.of(context).textTheme.titleLarge,
         ),
         actions: [
           PopupMenuButton<int>(
             initialValue: _days,
             onSelected: (v) => setState(() => _days = v),
-            itemBuilder: (_) => const [
-              PopupMenuItem(value: 7, child: Text('Cette semaine')),
-              PopupMenuItem(value: 30, child: Text('Ce mois')),
+            itemBuilder: (_) => [
+              PopupMenuItem(value: 7, child: Text(l.thisWeek)),
+              PopupMenuItem(value: 30, child: Text(l.thisMonth)),
             ],
             child: Container(
               margin: const EdgeInsets.only(right: 16),
@@ -95,7 +94,7 @@ class _ProgressScreenState extends State<ProgressScreen> {
                 borderRadius: BorderRadius.circular(14),
               ),
               child: Text(
-                _days == 7 ? 'Cette semaine' : 'Ce mois',
+                _days == 7 ? l.thisWeek : l.thisMonth,
                 style: const TextStyle(
                   color: AppColors.primary,
                   fontWeight: FontWeight.w700,
@@ -111,9 +110,13 @@ class _ProgressScreenState extends State<ProgressScreen> {
         children: [
           Row(
             children: [
-              _statCard('Terminées', '${s.tasksDone}', AppColors.mint),
+              _statCard(l.statDone, '${s.tasksDone}', AppColors.mint),
               const SizedBox(width: 12),
-              _statCard('En cours', '${s.tasksActive}', AppColors.primary),
+              _statCard(
+                l.statInProgress,
+                '${s.tasksActive}',
+                AppColors.primary,
+              ),
             ],
           ),
           const SizedBox(height: 12),
@@ -129,9 +132,12 @@ class _ProgressScreenState extends State<ProgressScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  'En retard',
-                  style: TextStyle(color: AppColors.textSoft, fontSize: 13),
+                Text(
+                  l.overdueLabel,
+                  style: const TextStyle(
+                    color: AppColors.textSoft,
+                    fontSize: 13,
+                  ),
                 ),
                 const SizedBox(height: 4),
                 Row(
@@ -149,7 +155,7 @@ class _ProgressScreenState extends State<ProgressScreen> {
                     Padding(
                       padding: const EdgeInsets.only(bottom: 5),
                       child: Text(
-                        '$latePercent % des tâches',
+                        l.percentOfTasks(latePercent),
                         style: const TextStyle(
                           color: AppColors.coral,
                           fontWeight: FontWeight.w600,
@@ -172,9 +178,9 @@ class _ProgressScreenState extends State<ProgressScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  'Évolution des tâches',
-                  style: TextStyle(
+                Text(
+                  l.taskEvolution,
+                  style: const TextStyle(
                     color: AppColors.navy,
                     fontWeight: FontWeight.w800,
                     fontSize: 15,
@@ -191,15 +197,18 @@ class _ProgressScreenState extends State<ProgressScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Il y a $_days jours',
+                      l.daysAgo(_days),
                       style: const TextStyle(
                         color: AppColors.textSoft,
                         fontSize: 11,
                       ),
                     ),
-                    const Text(
-                      'Aujourd\'hui',
-                      style: TextStyle(color: AppColors.textSoft, fontSize: 11),
+                    Text(
+                      l.today,
+                      style: const TextStyle(
+                        color: AppColors.textSoft,
+                        fontSize: 11,
+                      ),
                     ),
                   ],
                 ),
@@ -208,9 +217,9 @@ class _ProgressScreenState extends State<ProgressScreen> {
                   spacing: 16,
                   runSpacing: 6,
                   children: [
-                    _legend('Terminées', AppColors.mint),
-                    _legend('En cours', AppColors.primary),
-                    _legend('En retard', AppColors.coral),
+                    _legend(l.legendDone, AppColors.mint),
+                    _legend(l.legendActive, AppColors.primary),
+                    _legend(l.legendLate, AppColors.coral),
                   ],
                 ),
               ],

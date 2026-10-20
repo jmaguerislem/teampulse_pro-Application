@@ -937,6 +937,270 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Aucune échéance ce jour-là.'**
   String get noDeadlineThatDay;
+
+  /// No description provided for @moreTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Plus'**
+  String get moreTitle;
+
+  /// No description provided for @notificationsTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Notifications'**
+  String get notificationsTitle;
+
+  /// No description provided for @notificationsSubtitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Retards, rappels et affectations'**
+  String get notificationsSubtitle;
+
+  /// No description provided for @statsTile.
+  ///
+  /// In fr, this message translates to:
+  /// **'Statistiques et progression'**
+  String get statsTile;
+
+  /// No description provided for @statsTileSubtitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Évolution de vos tâches'**
+  String get statsTileSubtitle;
+
+  /// No description provided for @reportsTile.
+  ///
+  /// In fr, this message translates to:
+  /// **'Rapports'**
+  String get reportsTile;
+
+  /// No description provided for @reportsTileSubtitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Résumé global ou par projet'**
+  String get reportsTileSubtitle;
+
+  /// No description provided for @profileTile.
+  ///
+  /// In fr, this message translates to:
+  /// **'Profil et paramètres'**
+  String get profileTile;
+
+  /// No description provided for @profileTileSubtitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Compte, notifications, apparence'**
+  String get profileTileSubtitle;
+
+  /// No description provided for @filterUnread.
+  ///
+  /// In fr, this message translates to:
+  /// **'Non lues · {count}'**
+  String filterUnread(int count);
+
+  /// No description provided for @markAllRead.
+  ///
+  /// In fr, this message translates to:
+  /// **'Tout lire'**
+  String get markAllRead;
+
+  /// No description provided for @noNotifications.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucune notification'**
+  String get noNotifications;
+
+  /// No description provided for @notifOverdueTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Tâche en retard'**
+  String get notifOverdueTitle;
+
+  /// No description provided for @notifOverdueMsg.
+  ///
+  /// In fr, this message translates to:
+  /// **'« {task} » a {days, plural, =1{1 jour} other{{days} jours}} de retard'**
+  String notifOverdueMsg(String task, int days);
+
+  /// No description provided for @notifReminderTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Rappel d’échéance'**
+  String get notifReminderTitle;
+
+  /// No description provided for @notifReminderToday.
+  ///
+  /// In fr, this message translates to:
+  /// **'« {task} » arrive à échéance aujourd’hui'**
+  String notifReminderToday(String task);
+
+  /// No description provided for @notifReminderTomorrow.
+  ///
+  /// In fr, this message translates to:
+  /// **'« {task} » arrive à échéance demain'**
+  String notifReminderTomorrow(String task);
+
+  /// No description provided for @notifReminderTwoDays.
+  ///
+  /// In fr, this message translates to:
+  /// **'« {task} » arrive à échéance dans 2 jours'**
+  String notifReminderTwoDays(String task);
+
+  /// No description provided for @notifAssignTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Nouvelle affectation'**
+  String get notifAssignTitle;
+
+  /// No description provided for @notifAssignMsg.
+  ///
+  /// In fr, this message translates to:
+  /// **'« {task} » est assignée à {member}'**
+  String notifAssignMsg(String task, String member);
+
+  /// No description provided for @progressTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Progression'**
+  String get progressTitle;
+
+  /// No description provided for @thisWeek.
+  ///
+  /// In fr, this message translates to:
+  /// **'Cette semaine'**
+  String get thisWeek;
+
+  /// No description provided for @thisMonth.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ce mois'**
+  String get thisMonth;
+
+  /// No description provided for @statInProgress.
+  ///
+  /// In fr, this message translates to:
+  /// **'En cours'**
+  String get statInProgress;
+
+  /// No description provided for @overdueLabel.
+  ///
+  /// In fr, this message translates to:
+  /// **'En retard'**
+  String get overdueLabel;
+
+  /// No description provided for @percentOfTasks.
+  ///
+  /// In fr, this message translates to:
+  /// **'{percent} % des tâches'**
+  String percentOfTasks(int percent);
+
+  /// No description provided for @taskEvolution.
+  ///
+  /// In fr, this message translates to:
+  /// **'Évolution des tâches'**
+  String get taskEvolution;
+
+  /// No description provided for @daysAgo.
+  ///
+  /// In fr, this message translates to:
+  /// **'Il y a {days} jours'**
+  String daysAgo(int days);
+
+  /// No description provided for @legendDone.
+  ///
+  /// In fr, this message translates to:
+  /// **'Terminées'**
+  String get legendDone;
+
+  /// No description provided for @legendActive.
+  ///
+  /// In fr, this message translates to:
+  /// **'En cours'**
+  String get legendActive;
+
+  /// No description provided for @legendLate.
+  ///
+  /// In fr, this message translates to:
+  /// **'En retard'**
+  String get legendLate;
+
+  /// No description provided for @reportsTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Rapports'**
+  String get reportsTitle;
+
+  /// No description provided for @tabGlobal.
+  ///
+  /// In fr, this message translates to:
+  /// **'Global'**
+  String get tabGlobal;
+
+  /// No description provided for @tabByProject.
+  ///
+  /// In fr, this message translates to:
+  /// **'Par projet'**
+  String get tabByProject;
+
+  /// No description provided for @noProjectYet.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucun projet pour le moment'**
+  String get noProjectYet;
+
+  /// No description provided for @summary.
+  ///
+  /// In fr, this message translates to:
+  /// **'Résumé'**
+  String get summary;
+
+  /// No description provided for @totalTasks.
+  ///
+  /// In fr, this message translates to:
+  /// **'Total des tâches'**
+  String get totalTasks;
+
+  /// No description provided for @avgResolution.
+  ///
+  /// In fr, this message translates to:
+  /// **'Temps moyen de résolution'**
+  String get avgResolution;
+
+  /// No description provided for @successRate.
+  ///
+  /// In fr, this message translates to:
+  /// **'Taux de réussite'**
+  String get successRate;
+
+  /// No description provided for @exportPdf.
+  ///
+  /// In fr, this message translates to:
+  /// **'Exporter en PDF'**
+  String get exportPdf;
+
+  /// No description provided for @pdfSoon.
+  ///
+  /// In fr, this message translates to:
+  /// **'Export PDF : bientôt disponible.'**
+  String get pdfSoon;
+
+  /// No description provided for @durationDaysHours.
+  ///
+  /// In fr, this message translates to:
+  /// **'{days} j {hours} h'**
+  String durationDaysHours(int days, int hours);
+
+  /// No description provided for @durationHours.
+  ///
+  /// In fr, this message translates to:
+  /// **'{hours} h'**
+  String durationHours(int hours);
+
+  /// No description provided for @durationMinutes.
+  ///
+  /// In fr, this message translates to:
+  /// **'{minutes} min'**
+  String durationMinutes(int minutes);
 }
 
 class _AppLocalizationsDelegate

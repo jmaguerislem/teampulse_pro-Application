@@ -3,9 +3,10 @@ import 'package:provider/provider.dart';
 
 import '../core/app_colors.dart';
 import '../core/app_state.dart';
+import '../core/settings_state.dart';
+import '../l10n/app_localizations.dart';
 import '../models/notification_item.dart';
 import 'task_details_screen.dart';
-import '../core/settings_state.dart';
 
 class NotificationsScreen extends StatefulWidget {
   const NotificationsScreen({super.key});
@@ -49,9 +50,34 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
     }
   }
 
+  String _title(NotifType t, AppLocalizations l) {
+    switch (t) {
+      case NotifType.overdue:
+        return l.notifOverdueTitle;
+      case NotifType.reminder:
+        return l.notifReminderTitle;
+      case NotifType.assignment:
+        return l.notifAssignTitle;
+    }
+  }
+
+  String _message(AppNotification n, AppLocalizations l) {
+    switch (n.type) {
+      case NotifType.overdue:
+        return l.notifOverdueMsg(n.taskTitle, n.days);
+      case NotifType.reminder:
+        if (n.days == 0) return l.notifReminderToday(n.taskTitle);
+        if (n.days == 1) return l.notifReminderTomorrow(n.taskTitle);
+        return l.notifReminderTwoDays(n.taskTitle);
+      case NotifType.assignment:
+        return l.notifAssignMsg(n.taskTitle, n.memberName ?? '');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final s = context.watch<AppState>();
+    final l = AppLocalizations.of(context)!;
     final prefs = context.watch<SettingsState>();
     final all = s.notifications.where((n) {
       switch (n.type) {
@@ -68,18 +94,15 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-
         title: Text(
-          'Notifications',
+          l.notificationsTitle,
           style: Theme.of(context).textTheme.titleLarge,
         ),
         actions: [
           if (unread > 0)
             TextButton(
               onPressed: () => context.read<AppState>().markAllRead(),
-              child: const Text('Tout lire'),
+              child: Text(l.markAllRead),
             ),
         ],
       ),
@@ -91,13 +114,13 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
             child: Row(
               children: [
                 _chip(
-                  'Toutes',
+                  l.filterAll,
                   !_onlyUnread,
                   () => setState(() => _onlyUnread = false),
                 ),
                 const SizedBox(width: 8),
                 _chip(
-                  'Non lues · $unread',
+                  l.filterUnread(unread),
                   _onlyUnread,
                   () => setState(() => _onlyUnread = true),
                 ),
@@ -106,10 +129,10 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
           ),
           Expanded(
             child: list.isEmpty
-                ? const Center(
+                ? Center(
                     child: Text(
-                      'Aucune notification',
-                      style: TextStyle(color: AppColors.textSoft),
+                      l.noNotifications,
+                      style: const TextStyle(color: AppColors.textSoft),
                     ),
                   )
                 : ListView.separated(
@@ -154,7 +177,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      n.title,
+                                      _title(n.type, l),
                                       style: TextStyle(
                                         color: AppColors.navy,
                                         fontWeight: read
@@ -165,7 +188,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                                     ),
                                     const SizedBox(height: 2),
                                     Text(
-                                      n.message,
+                                      _message(n, l),
                                       style: const TextStyle(
                                         color: AppColors.textSoft,
                                         fontSize: 13,

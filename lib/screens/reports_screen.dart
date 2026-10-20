@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import '../core/app_colors.dart';
 import '../core/app_state.dart';
+import '../l10n/app_localizations.dart';
 import '../widgets/primary_button.dart';
 
 class ReportsScreen extends StatefulWidget {
@@ -16,13 +16,13 @@ class _ReportsScreenState extends State<ReportsScreen> {
   int _tab = 0;
   String? _projectId;
 
-  String _fmtDuration(Duration? d) {
+  String _fmtDuration(Duration? d, AppLocalizations l) {
     if (d == null) return '—';
     final days = d.inDays;
     final hours = d.inHours % 24;
-    if (days > 0) return '$days j $hours h';
-    if (d.inHours > 0) return '${d.inHours} h';
-    return '${d.inMinutes} min';
+    if (days > 0) return l.durationDaysHours(days, hours);
+    if (d.inHours > 0) return l.durationHours(d.inHours);
+    return l.durationMinutes(d.inMinutes);
   }
 
   Widget _tabChip(String label, int index) {
@@ -37,14 +37,12 @@ class _ReportsScreenState extends State<ReportsScreen> {
             color: selected ? AppColors.navy : Colors.white,
             borderRadius: BorderRadius.circular(22),
           ),
-          child: Text(
-            label,
-            style: TextStyle(
-              color: selected ? Colors.white : AppColors.navy,
-              fontWeight: FontWeight.w700,
-              fontSize: 13,
-            ),
-          ),
+          child: Text(label,
+              style: TextStyle(
+                color: selected ? Colors.white : AppColors.navy,
+                fontWeight: FontWeight.w700,
+                fontSize: 13,
+              )),
         ),
       ),
     );
@@ -61,18 +59,15 @@ class _ReportsScreenState extends State<ReportsScreen> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            label,
-            style: const TextStyle(color: AppColors.textSoft, fontSize: 14),
-          ),
-          Text(
-            value,
-            style: TextStyle(
-              color: color ?? AppColors.navy,
-              fontWeight: FontWeight.w800,
-              fontSize: 14,
-            ),
-          ),
+          Text(label,
+              style:
+                  const TextStyle(color: AppColors.textSoft, fontSize: 14)),
+          Text(value,
+              style: TextStyle(
+                color: color ?? AppColors.navy,
+                fontWeight: FontWeight.w800,
+                fontSize: 14,
+              )),
         ],
       ),
     );
@@ -81,6 +76,7 @@ class _ReportsScreenState extends State<ReportsScreen> {
   @override
   Widget build(BuildContext context) {
     final s = context.watch<AppState>();
+    final l = AppLocalizations.of(context)!;
     final projects = s.projects;
 
     final String? pid = _tab == 0
@@ -92,15 +88,16 @@ class _ReportsScreenState extends State<ReportsScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-
-        title: Text('Rapports', style: Theme.of(context).textTheme.titleLarge),
+        title: Text(l.reportsTitle,
+            style: Theme.of(context).textTheme.titleLarge),
       ),
       body: ListView(
         padding: const EdgeInsets.fromLTRB(20, 8, 20, 32),
         children: [
-          Row(children: [_tabChip('Global', 0), _tabChip('Par projet', 1)]),
+          Row(children: [
+            _tabChip(l.tabGlobal, 0),
+            _tabChip(l.tabByProject, 1),
+          ]),
           const SizedBox(height: 16),
           if (_tab == 1 && projects.isNotEmpty) ...[
             Container(
@@ -119,9 +116,8 @@ class _ReportsScreenState extends State<ReportsScreen> {
                   fontSize: 14,
                 ),
                 items: projects
-                    .map(
-                      (p) => DropdownMenuItem(value: p.id, child: Text(p.name)),
-                    )
+                    .map((p) =>
+                        DropdownMenuItem(value: p.id, child: Text(p.name)))
                     .toList(),
                 onChanged: (v) => setState(() => _projectId = v),
               ),
@@ -129,13 +125,11 @@ class _ReportsScreenState extends State<ReportsScreen> {
             const SizedBox(height: 16),
           ],
           if (noProject)
-            const Padding(
-              padding: EdgeInsets.symmetric(vertical: 32),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 32),
               child: Center(
-                child: Text(
-                  'Aucun projet pour le moment',
-                  style: TextStyle(color: AppColors.textSoft),
-                ),
+                child: Text(l.noProjectYet,
+                    style: const TextStyle(color: AppColors.textSoft)),
               ),
             )
           else ...[
@@ -148,23 +142,19 @@ class _ReportsScreenState extends State<ReportsScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    'Résumé',
-                    style: TextStyle(
-                      color: AppColors.navy,
-                      fontWeight: FontWeight.w800,
-                      fontSize: 16,
-                    ),
-                  ),
+                  Text(l.summary,
+                      style: const TextStyle(
+                        color: AppColors.navy,
+                        fontWeight: FontWeight.w800,
+                        fontSize: 16,
+                      )),
                   const SizedBox(height: 4),
-                  _row('Total des tâches', '${r.total}'),
-                  _row('Terminées', '${r.done}', color: AppColors.mint),
-                  _row('En retard', '${r.overdue}', color: AppColors.coral),
-                  _row(
-                    'Temps moyen de résolution',
-                    _fmtDuration(r.avgResolution),
-                    last: true,
-                  ),
+                  _row(l.totalTasks, '${r.total}'),
+                  _row(l.statDone, '${r.done}', color: AppColors.mint),
+                  _row(l.overdueLabel, '${r.overdue}',
+                      color: AppColors.coral),
+                  _row(l.avgResolution, _fmtDuration(r.avgResolution, l),
+                      last: true),
                 ],
               ),
             ),
@@ -180,22 +170,18 @@ class _ReportsScreenState extends State<ReportsScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text(
-                        'Taux de réussite',
-                        style: TextStyle(
-                          color: AppColors.navy,
-                          fontWeight: FontWeight.w800,
-                          fontSize: 15,
-                        ),
-                      ),
-                      Text(
-                        '$percent %',
-                        style: const TextStyle(
-                          color: AppColors.mint,
-                          fontWeight: FontWeight.w800,
-                          fontSize: 15,
-                        ),
-                      ),
+                      Text(l.successRate,
+                          style: const TextStyle(
+                            color: AppColors.navy,
+                            fontWeight: FontWeight.w800,
+                            fontSize: 15,
+                          )),
+                      Text('$percent %',
+                          style: const TextStyle(
+                            color: AppColors.mint,
+                            fontWeight: FontWeight.w800,
+                            fontSize: 15,
+                          )),
                     ],
                   ),
                   const SizedBox(height: 10),
@@ -205,7 +191,8 @@ class _ReportsScreenState extends State<ReportsScreen> {
                       value: r.successRate,
                       minHeight: 8,
                       backgroundColor: AppColors.background,
-                      valueColor: const AlwaysStoppedAnimation(AppColors.mint),
+                      valueColor:
+                          const AlwaysStoppedAnimation(AppColors.mint),
                     ),
                   ),
                 ],
@@ -213,12 +200,10 @@ class _ReportsScreenState extends State<ReportsScreen> {
             ),
             const SizedBox(height: 22),
             PrimaryButton(
-              label: 'Exporter en PDF',
+              label: l.exportPdf,
               onPressed: () {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text('Export PDF : bientôt disponible.'),
-                  ),
+                  SnackBar(content: Text(l.pdfSoon)),
                 );
               },
             ),

@@ -477,4 +477,164 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get noDeadlineThatDay => 'No deadlines that day.';
+
+  @override
+  String get moreTitle => 'More';
+
+  @override
+  String get notificationsTitle => 'Notifications';
+
+  @override
+  String get notificationsSubtitle => 'Overdue, reminders and assignments';
+
+  @override
+  String get statsTile => 'Statistics and progress';
+
+  @override
+  String get statsTileSubtitle => 'Evolution of your tasks';
+
+  @override
+  String get reportsTile => 'Reports';
+
+  @override
+  String get reportsTileSubtitle => 'Overall or per-project summary';
+
+  @override
+  String get profileTile => 'Profile and settings';
+
+  @override
+  String get profileTileSubtitle => 'Account, notifications, appearance';
+
+  @override
+  String filterUnread(int count) {
+    return 'Unread · $count';
+  }
+
+  @override
+  String get markAllRead => 'Mark all read';
+
+  @override
+  String get noNotifications => 'No notifications';
+
+  @override
+  String get notifOverdueTitle => 'Overdue task';
+
+  @override
+  String notifOverdueMsg(String task, int days) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: '$days days',
+      one: '1 day',
+    );
+    return '“$task” is $_temp0 overdue';
+  }
+
+  @override
+  String get notifReminderTitle => 'Deadline reminder';
+
+  @override
+  String notifReminderToday(String task) {
+    return '“$task” is due today';
+  }
+
+  @override
+  String notifReminderTomorrow(String task) {
+    return '“$task” is due tomorrow';
+  }
+
+  @override
+  String notifReminderTwoDays(String task) {
+    return '“$task” is due in 2 days';
+  }
+
+  @override
+  String get notifAssignTitle => 'New assignment';
+
+  @override
+  String notifAssignMsg(String task, String member) {
+    return '“$task” is assigned to $member';
+  }
+
+  @override
+  String get progressTitle => 'Progress';
+
+  @override
+  String get thisWeek => 'This week';
+
+  @override
+  String get thisMonth => 'This month';
+
+  @override
+  String get statInProgress => 'In progress';
+
+  @override
+  String get overdueLabel => 'Overdue';
+
+  @override
+  String percentOfTasks(int percent) {
+    return '$percent% of tasks';
+  }
+
+  @override
+  String get taskEvolution => 'Task evolution';
+
+  @override
+  String daysAgo(int days) {
+    return '$days days ago';
+  }
+
+  @override
+  String get legendDone => 'Completed';
+
+  @override
+  String get legendActive => 'In progress';
+
+  @override
+  String get legendLate => 'Overdue';
+
+  @override
+  String get reportsTitle => 'Reports';
+
+  @override
+  String get tabGlobal => 'Overall';
+
+  @override
+  String get tabByProject => 'By project';
+
+  @override
+  String get noProjectYet => 'No projects yet';
+
+  @override
+  String get summary => 'Summary';
+
+  @override
+  String get totalTasks => 'Total tasks';
+
+  @override
+  String get avgResolution => 'Average resolution time';
+
+  @override
+  String get successRate => 'Success rate';
+
+  @override
+  String get exportPdf => 'Export as PDF';
+
+  @override
+  String get pdfSoon => 'PDF export: coming soon.';
+
+  @override
+  String durationDaysHours(int days, int hours) {
+    return '$days d $hours h';
+  }
+
+  @override
+  String durationHours(int hours) {
+    return '$hours h';
+  }
+
+  @override
+  String durationMinutes(int minutes) {
+    return '$minutes min';
+  }
 }

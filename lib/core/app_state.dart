@@ -122,29 +122,23 @@ class AppState extends ChangeNotifier {
       final diff = due.difference(today).inDays;
 
       if (diff < 0) {
-        final n = -diff;
         list.add(
           AppNotification(
             id: 'overdue_${t.id}',
             type: NotifType.overdue,
-            title: 'Tâche en retard',
-            message: '« ${t.title} » a $n jour${n > 1 ? 's' : ''} de retard',
             taskId: t.id,
+            taskTitle: t.title,
+            days: -diff,
           ),
         );
       } else if (diff <= 2) {
-        final when = diff == 0
-            ? "aujourd'hui"
-            : diff == 1
-            ? 'demain'
-            : 'dans 2 jours';
         list.add(
           AppNotification(
             id: 'reminder_${t.id}',
             type: NotifType.reminder,
-            title: "Rappel d'échéance",
-            message: '« ${t.title} » arrive à échéance $when',
             taskId: t.id,
+            taskTitle: t.title,
+            days: diff,
           ),
         );
       }
@@ -156,9 +150,9 @@ class AppState extends ChangeNotifier {
             AppNotification(
               id: 'assign_${t.id}_${m.id}',
               type: NotifType.assignment,
-              title: 'Nouvelle affectation',
-              message: '« ${t.title} » est assignée à ${m.name}',
               taskId: t.id,
+              taskTitle: t.title,
+              memberName: m.name,
             ),
           );
         }
