@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../core/app_colors.dart';
 import '../core/app_state.dart';
 import '../core/project_ui.dart';
+import '../l10n/app_localizations.dart';
 import '../models/models.dart';
 import '../widgets/primary_button.dart';
 
@@ -78,16 +79,11 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
   @override
   Widget build(BuildContext context) {
     final projects = context.watch<AppState>().projects;
+    final l = AppLocalizations.of(context)!;
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-
-        title: Text(
-          'Nouvelle tâche',
-          style: Theme.of(context).textTheme.titleLarge,
-        ),
+        title: Text(l.newTask, style: Theme.of(context).textTheme.titleLarge),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -96,26 +92,21 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _label('Titre'),
+              _label(l.titleLabel),
               TextFormField(
                 controller: _titleController,
                 textCapitalization: TextCapitalization.sentences,
-                decoration: const InputDecoration(
-                  hintText: 'Ex : Conception de l\'UI',
-                ),
-                validator: (v) => (v == null || v.trim().isEmpty)
-                    ? 'Entrez le titre de la tâche.'
-                    : null,
+                decoration: InputDecoration(hintText: l.taskTitleHint),
+                validator: (v) =>
+                    (v == null || v.trim().isEmpty) ? l.enterTaskTitle : null,
               ),
-              _label('Description'),
+              _label(l.description),
               TextFormField(
                 controller: _descController,
                 maxLines: 3,
-                decoration: const InputDecoration(
-                  hintText: 'Décrivez brièvement la tâche…',
-                ),
+                decoration: InputDecoration(hintText: l.taskDescHint),
               ),
-              _label('Projet'),
+              _label(l.projectLabelShort),
               DropdownButtonFormField<String>(
                 initialValue: _projectId,
                 decoration: const InputDecoration(),
@@ -126,7 +117,7 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
                     .toList(),
                 onChanged: (v) => setState(() => _projectId = v!),
               ),
-              _label('Date limite'),
+              _label(l.deadline),
               InkWell(
                 borderRadius: BorderRadius.circular(18),
                 onTap: _pickDate,
@@ -138,28 +129,28 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
                   ),
                 ),
               ),
-              _label('Priorité'),
+              _label(l.priorityLabel),
               DropdownButtonFormField<TaskPriority>(
                 initialValue: _priority,
                 decoration: const InputDecoration(),
-                items: const [
+                items: [
                   DropdownMenuItem(
                     value: TaskPriority.high,
-                    child: Text('Haute'),
+                    child: Text(l.priorityHigh),
                   ),
                   DropdownMenuItem(
                     value: TaskPriority.medium,
-                    child: Text('Moyenne'),
+                    child: Text(l.priorityMedium),
                   ),
                   DropdownMenuItem(
                     value: TaskPriority.low,
-                    child: Text('Basse'),
+                    child: Text(l.priorityLow),
                   ),
                 ],
                 onChanged: (v) => setState(() => _priority = v!),
               ),
               const SizedBox(height: 28),
-              PrimaryButton(label: 'Créer la tâche', onPressed: _submit),
+              PrimaryButton(label: l.createTheTask, onPressed: _submit),
               const SizedBox(height: 32),
             ],
           ),

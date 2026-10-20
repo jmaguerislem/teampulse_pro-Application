@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../core/app_colors.dart';
 import '../core/app_state.dart';
+import '../l10n/app_localizations.dart';
 import '../widgets/priority_chip.dart';
 import 'task_details_screen.dart';
 
@@ -14,7 +15,7 @@ class DeadlinesScreen extends StatefulWidget {
 }
 
 class _DeadlinesScreenState extends State<DeadlinesScreen> {
-  static const _months = [
+  static const _monthsFr = [
     'Janvier',
     'Février',
     'Mars',
@@ -28,7 +29,20 @@ class _DeadlinesScreenState extends State<DeadlinesScreen> {
     'Novembre',
     'Décembre',
   ];
-  static const _days = ['L', 'M', 'M', 'J', 'V', 'S', 'D'];
+  static const _monthsEn = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ];
 
   late DateTime _month;
   late DateTime _selected;
@@ -50,17 +64,31 @@ class _DeadlinesScreenState extends State<DeadlinesScreen> {
   @override
   Widget build(BuildContext context) {
     final s = context.watch<AppState>();
+    final l = AppLocalizations.of(context)!;
+    final isEn = Localizations.localeOf(context).languageCode == 'en';
+    final months = isEn ? _monthsEn : _monthsFr;
+    final weekdays = [
+      l.weekdayMon,
+      l.weekdayTue,
+      l.weekdayWed,
+      l.weekdayThu,
+      l.weekdayFri,
+      l.weekdaySat,
+      l.weekdaySun,
+    ];
     final daysInMonth = DateTime(_month.year, _month.month + 1, 0).day;
     final offset = DateTime(_month.year, _month.month, 1).weekday - 1;
     final today = DateTime.now();
     final dayTasks = s.tasksOnDay(_selected);
+    final dd = _selected.day.toString().padLeft(2, '0');
+    final mm = _selected.month.toString().padLeft(2, '0');
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-
-        title: Text('Échéances', style: Theme.of(context).textTheme.titleLarge),
+        title: Text(
+          l.deadlinesTitle,
+          style: Theme.of(context).textTheme.titleLarge,
+        ),
       ),
       body: ListView(
         padding: const EdgeInsets.fromLTRB(20, 8, 20, 32),
@@ -69,7 +97,7 @@ class _DeadlinesScreenState extends State<DeadlinesScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                '${_months[_month.month - 1]} ${_month.year}',
+                '${months[_month.month - 1]} ${_month.year}',
                 style: Theme.of(context).textTheme.titleLarge,
               ),
               Row(
@@ -88,7 +116,7 @@ class _DeadlinesScreenState extends State<DeadlinesScreen> {
           ),
           const SizedBox(height: 8),
           Row(
-            children: _days
+            children: weekdays
                 .map(
                   (d) => Expanded(
                     child: Center(
@@ -163,15 +191,15 @@ class _DeadlinesScreenState extends State<DeadlinesScreen> {
           const SizedBox(height: 20),
           Text(
             _same(_selected, today)
-                ? 'Aujourd\'hui · ${dayTasks.length}'
-                : '${_selected.day.toString().padLeft(2, '0')}/${_selected.month.toString().padLeft(2, '0')} · ${dayTasks.length}',
+                ? l.todayCount(dayTasks.length)
+                : l.dateCount('$dd/$mm', dayTasks.length),
             style: Theme.of(context).textTheme.titleMedium,
           ),
           const SizedBox(height: 12),
           if (dayTasks.isEmpty)
-            const Text(
-              'Aucune échéance ce jour-là.',
-              style: TextStyle(color: AppColors.textSoft),
+            Text(
+              l.noDeadlineThatDay,
+              style: const TextStyle(color: AppColors.textSoft),
             )
           else
             ...dayTasks.map(

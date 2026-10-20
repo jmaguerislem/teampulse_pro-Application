@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../core/app_colors.dart';
 import '../core/app_state.dart';
 import '../core/project_ui.dart';
+import '../l10n/app_localizations.dart';
 import '../models/models.dart';
 import '../widgets/priority_chip.dart';
 import 'assign_task_screen.dart';
@@ -13,21 +14,22 @@ class TaskDetailsScreen extends StatelessWidget {
   const TaskDetailsScreen({super.key, required this.taskId});
 
   Future<void> _confirmDelete(BuildContext context, Task t) async {
+    final l = AppLocalizations.of(context)!;
     final ok = await showDialog<bool>(
       context: context,
       builder: (ctx) => AlertDialog(
-        title: const Text('Supprimer cette tâche ?'),
-        content: Text('« ${t.title} » sera supprimée définitivement.'),
+        title: Text(l.deleteTaskTitle),
+        content: Text(l.deleteTaskBody(t.title)),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(ctx, false),
-            child: const Text('Annuler'),
+            child: Text(l.cancel),
           ),
           TextButton(
             onPressed: () => Navigator.pop(ctx, true),
-            child: const Text(
-              'Supprimer',
-              style: TextStyle(color: AppColors.coral),
+            child: Text(
+              l.delete,
+              style: const TextStyle(color: AppColors.coral),
             ),
           ),
         ],
@@ -63,6 +65,7 @@ class TaskDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final s = context.watch<AppState>();
+    final l = AppLocalizations.of(context)!;
     final t = s.taskById(taskId);
     if (t == null) return const Scaffold(body: SizedBox());
 
@@ -70,16 +73,13 @@ class TaskDetailsScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-
         title: Text(
-          'Détail de la tâche',
+          l.taskDetail,
           style: Theme.of(context).textTheme.titleLarge,
         ),
         actions: [
           IconButton(
-            tooltip: 'Supprimer',
+            tooltip: l.delete,
             icon: const Icon(Icons.delete_outline, color: AppColors.coral),
             onPressed: () => _confirmDelete(context, t),
           ),
@@ -102,12 +102,12 @@ class TaskDetailsScreen extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           Text(
-            'Projet : ${project?.name ?? 'Projet supprimé'}',
+            l.projectNameLine(project?.name ?? l.deletedProject),
             style: const TextStyle(color: AppColors.textSoft, fontSize: 14),
           ),
           const SizedBox(height: 12),
           Text(
-            t.description.isEmpty ? 'Aucune description.' : t.description,
+            t.description.isEmpty ? l.noDescription : t.description,
             style: const TextStyle(
               color: AppColors.textSoft,
               fontSize: 14,
@@ -116,7 +116,7 @@ class TaskDetailsScreen extends StatelessWidget {
           ),
           const SizedBox(height: 20),
           _row(
-            'Date limite',
+            l.deadline,
             Text(
               fmtDate(t.dueDate),
               style: TextStyle(
@@ -126,7 +126,7 @@ class TaskDetailsScreen extends StatelessWidget {
             ),
           ),
           _row(
-            'Statut',
+            l.status,
             DropdownButton<TaskStatus>(
               value: t.status,
               underline: const SizedBox(),
@@ -139,7 +139,7 @@ class TaskDetailsScreen extends StatelessWidget {
                   .map(
                     (st) => DropdownMenuItem(
                       value: st,
-                      child: Text(taskStatusLabel(st)),
+                      child: Text(taskStatusLabel(st, l)),
                     ),
                   )
                   .toList(),
@@ -156,11 +156,11 @@ class TaskDetailsScreen extends StatelessWidget {
               MaterialPageRoute(builder: (_) => AssignTaskScreen(taskId: t.id)),
             ),
             child: _row(
-              'Assigné à',
+              l.assignedTo,
               Row(
                 children: [
                   Text(
-                    s.memberById(t.assignee ?? '')?.name ?? 'Non assigné',
+                    s.memberById(t.assignee ?? '')?.name ?? l.unassigned,
                     style: const TextStyle(
                       color: AppColors.navy,
                       fontWeight: FontWeight.w700,

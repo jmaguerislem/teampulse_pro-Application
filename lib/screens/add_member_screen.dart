@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../core/app_colors.dart';
 import '../core/app_state.dart';
+import '../l10n/app_localizations.dart';
 import '../models/models.dart';
 import '../widgets/primary_button.dart';
 
@@ -52,15 +53,11 @@ class _AddMemberScreenState extends State<AddMemberScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context)!;
+
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-
-        title: Text(
-          'Nouveau membre',
-          style: Theme.of(context).textTheme.titleLarge,
-        ),
+        title: Text(l.newMember, style: Theme.of(context).textTheme.titleLarge),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -69,30 +66,24 @@ class _AddMemberScreenState extends State<AddMemberScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _label('Nom complet'),
+              _label(l.fullNameLabel),
               TextFormField(
                 controller: _nameController,
                 textCapitalization: TextCapitalization.words,
-                decoration: const InputDecoration(
-                  hintText: 'Ex : Amina Ben Ali',
-                ),
-                validator: (v) => (v == null || v.trim().isEmpty)
-                    ? 'Entrez le nom du membre.'
-                    : null,
+                decoration: InputDecoration(hintText: l.memberNameHint),
+                validator: (v) =>
+                    (v == null || v.trim().isEmpty) ? l.enterMemberName : null,
               ),
-              _label('Rôle'),
+              _label(l.roleLabel),
               TextFormField(
                 controller: _roleController,
                 textCapitalization: TextCapitalization.sentences,
-                decoration: const InputDecoration(
-                  hintText: 'Ex : Développeuse front',
-                ),
-                validator: (v) => (v == null || v.trim().isEmpty)
-                    ? 'Entrez le rôle du membre.'
-                    : null,
+                decoration: InputDecoration(hintText: l.roleHint),
+                validator: (v) =>
+                    (v == null || v.trim().isEmpty) ? l.enterMemberRole : null,
               ),
               const SizedBox(height: 28),
-              PrimaryButton(label: 'Ajouter le membre', onPressed: _submit),
+              PrimaryButton(label: l.addTheMember, onPressed: _submit),
               const SizedBox(height: 32),
             ],
           ),

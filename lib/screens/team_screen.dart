@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../core/app_colors.dart';
 import '../core/app_state.dart';
+import '../l10n/app_localizations.dart';
 import '../models/models.dart';
 import '../widgets/member_avatar.dart';
 import 'add_member_screen.dart';
@@ -11,23 +12,22 @@ class TeamScreen extends StatelessWidget {
   const TeamScreen({super.key});
 
   Future<void> _confirmDelete(BuildContext context, Member m) async {
+    final l = AppLocalizations.of(context)!;
     final ok = await showDialog<bool>(
       context: context,
       builder: (ctx) => AlertDialog(
-        title: const Text('Retirer ce membre ?'),
-        content: Text(
-          '« ${m.name} » sera retiré. Ses tâches redeviendront non assignées.',
-        ),
+        title: Text(l.removeMemberTitle),
+        content: Text(l.removeMemberBody(m.name)),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(ctx, false),
-            child: const Text('Annuler'),
+            child: Text(l.cancel),
           ),
           TextButton(
             onPressed: () => Navigator.pop(ctx, true),
-            child: const Text(
-              'Retirer',
-              style: TextStyle(color: AppColors.coral),
+            child: Text(
+              l.remove,
+              style: const TextStyle(color: AppColors.coral),
             ),
           ),
         ],
@@ -41,6 +41,7 @@ class TeamScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final s = context.watch<AppState>();
+    final l = AppLocalizations.of(context)!;
     final members = s.members;
 
     return SafeArea(
@@ -52,16 +53,16 @@ class TeamScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.fromLTRB(20, 16, 20, 12),
                 child: Text(
-                  'Équipe',
+                  l.navTeam,
                   style: Theme.of(context).textTheme.headlineLarge,
                 ),
               ),
               Expanded(
                 child: members.isEmpty
-                    ? const Center(
+                    ? Center(
                         child: Text(
-                          'Aucun membre pour le moment',
-                          style: TextStyle(color: AppColors.textSoft),
+                          l.noMembersYet,
+                          style: const TextStyle(color: AppColors.textSoft),
                         ),
                       )
                     : ListView.separated(
@@ -96,7 +97,7 @@ class TeamScreen extends StatelessWidget {
                                       ),
                                       const SizedBox(height: 2),
                                       Text(
-                                        '${m.role} · $n tâche${n > 1 ? 's' : ''}',
+                                        l.memberRoleTasks(m.role, n),
                                         style: const TextStyle(
                                           color: AppColors.textSoft,
                                           fontSize: 13,
@@ -117,9 +118,9 @@ class TeamScreen extends StatelessWidget {
                                       ),
                                       borderRadius: BorderRadius.circular(14),
                                     ),
-                                    child: const Text(
-                                      'Cheffe de projet',
-                                      style: TextStyle(
+                                    child: Text(
+                                      l.projectLead,
+                                      style: const TextStyle(
                                         color: AppColors.primary,
                                         fontWeight: FontWeight.w700,
                                         fontSize: 10,

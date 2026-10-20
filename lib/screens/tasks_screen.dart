@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../core/app_colors.dart';
 import '../core/app_state.dart';
 import '../core/project_ui.dart';
+import '../l10n/app_localizations.dart';
 import '../models/models.dart';
 import '../widgets/priority_chip.dart';
 import 'create_task_screen.dart';
@@ -18,7 +19,6 @@ class TasksScreen extends StatefulWidget {
 }
 
 class _TasksScreenState extends State<TasksScreen> {
-  static const _filters = ['Toutes', 'À faire', 'En cours', 'Terminées'];
   int _filter = 0;
 
   List<Task> _apply(List<Task> all) {
@@ -37,6 +37,13 @@ class _TasksScreenState extends State<TasksScreen> {
   @override
   Widget build(BuildContext context) {
     final s = context.watch<AppState>();
+    final l = AppLocalizations.of(context)!;
+    final filters = [
+      l.filterAllFem,
+      l.taskTodo,
+      l.filterInProgress,
+      l.taskStatusDone,
+    ];
     final list = List<Task>.of(_apply(s.tasks))
       ..sort((a, b) => a.dueDate.compareTo(b.dueDate));
 
@@ -52,11 +59,11 @@ class _TasksScreenState extends State<TasksScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Tâches',
+                      l.navTasks,
                       style: Theme.of(context).textTheme.headlineLarge,
                     ),
                     IconButton(
-                      tooltip: 'Tableau Kanban',
+                      tooltip: l.kanbanBoard,
                       icon: const Icon(
                         Icons.view_kanban_outlined,
                         color: AppColors.primary,
@@ -74,7 +81,7 @@ class _TasksScreenState extends State<TasksScreen> {
                 child: ListView.separated(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   scrollDirection: Axis.horizontal,
-                  itemCount: _filters.length,
+                  itemCount: filters.length,
                   separatorBuilder: (_, _) => const SizedBox(width: 8),
                   itemBuilder: (_, i) {
                     final selected = i == _filter;
@@ -91,7 +98,7 @@ class _TasksScreenState extends State<TasksScreen> {
                           borderRadius: BorderRadius.circular(22),
                         ),
                         child: Text(
-                          _filters[i],
+                          filters[i],
                           style: TextStyle(
                             color: selected ? Colors.white : AppColors.navy,
                             fontWeight: FontWeight.w700,
@@ -106,10 +113,10 @@ class _TasksScreenState extends State<TasksScreen> {
               const SizedBox(height: 12),
               Expanded(
                 child: list.isEmpty
-                    ? const Center(
+                    ? Center(
                         child: Text(
-                          'Aucune tâche ici',
-                          style: TextStyle(color: AppColors.textSoft),
+                          l.noTaskHere,
+                          style: const TextStyle(color: AppColors.textSoft),
                         ),
                       )
                     : ListView.separated(
@@ -127,9 +134,9 @@ class _TasksScreenState extends State<TasksScreen> {
             child: GestureDetector(
               onTap: () {
                 if (s.projects.isEmpty) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Créez d\'abord un projet.')),
-                  );
+                  ScaffoldMessenger.of(
+                    context,
+                  ).showSnackBar(SnackBar(content: Text(l.createProjectFirst)));
                   return;
                 }
                 Navigator.push(
@@ -168,6 +175,7 @@ class _TaskCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final s = context.watch<AppState>();
+    final l = AppLocalizations.of(context)!;
     final project = s.projectById(task.projectId);
 
     return GestureDetector(
@@ -206,14 +214,17 @@ class _TaskCard extends StatelessWidget {
             ),
             const SizedBox(height: 6),
             Text(
-              '${project?.name ?? 'Projet supprimé'} · ${fmtDate(task.dueDate)}',
+              l.projectDateLine(
+                project?.name ?? l.deletedProject,
+                fmtDate(task.dueDate),
+              ),
               style: const TextStyle(color: AppColors.textSoft, fontSize: 13),
             ),
             if (task.isLate) ...[
               const SizedBox(height: 6),
-              const Text(
-                'En retard',
-                style: TextStyle(
+              Text(
+                l.late,
+                style: const TextStyle(
                   color: AppColors.coral,
                   fontWeight: FontWeight.w700,
                   fontSize: 12,

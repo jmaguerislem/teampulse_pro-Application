@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-
 import '../core/project_ui.dart';
+import '../l10n/app_localizations.dart';
 import '../models/models.dart';
 
 class PriorityChip extends StatelessWidget {
@@ -9,7 +9,7 @@ class PriorityChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final info = priorityInfo(priority);
+    final info = priorityInfo(priority, AppLocalizations.of(context)!);
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
       decoration: BoxDecoration(

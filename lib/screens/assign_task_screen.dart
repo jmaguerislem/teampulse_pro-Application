@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../core/app_colors.dart';
 import '../core/app_state.dart';
+import '../l10n/app_localizations.dart';
 import '../widgets/member_avatar.dart';
 import '../widgets/primary_button.dart';
 
@@ -26,16 +27,14 @@ class _AssignTaskScreenState extends State<AssignTaskScreen> {
   @override
   Widget build(BuildContext context) {
     final s = context.watch<AppState>();
+    final l = AppLocalizations.of(context)!;
     final task = s.taskById(widget.taskId);
     if (task == null) return const Scaffold(body: SizedBox());
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-
         title: Text(
-          'Affecter une tâche',
+          l.assignTask,
           style: Theme.of(context).textTheme.titleLarge,
         ),
       ),
@@ -44,9 +43,9 @@ class _AssignTaskScreenState extends State<AssignTaskScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              'Tâche',
-              style: TextStyle(
+            Text(
+              l.taskLabel,
+              style: const TextStyle(
                 color: AppColors.navy,
                 fontSize: 13,
                 fontWeight: FontWeight.w700,
@@ -66,9 +65,9 @@ class _AssignTaskScreenState extends State<AssignTaskScreen> {
               ),
             ),
             const SizedBox(height: 20),
-            const Text(
-              'Membre',
-              style: TextStyle(
+            Text(
+              l.memberLabel,
+              style: const TextStyle(
                 color: AppColors.navy,
                 fontSize: 13,
                 fontWeight: FontWeight.w700,
@@ -77,10 +76,10 @@ class _AssignTaskScreenState extends State<AssignTaskScreen> {
             const SizedBox(height: 8),
             Expanded(
               child: s.members.isEmpty
-                  ? const Center(
+                  ? Center(
                       child: Text(
-                        'Ajoutez d\'abord des membres (onglet Équipe).',
-                        style: TextStyle(color: AppColors.textSoft),
+                        l.addMembersFirst,
+                        style: const TextStyle(color: AppColors.textSoft),
                       ),
                     )
                   : ListView.separated(
@@ -145,7 +144,7 @@ class _AssignTaskScreenState extends State<AssignTaskScreen> {
             ),
             const SizedBox(height: 12),
             PrimaryButton(
-              label: 'Affecter',
+              label: l.assign,
               onPressed: () {
                 context.read<AppState>().assignTask(widget.taskId, _selected);
                 Navigator.pop(context);

@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../core/app_colors.dart';
 import '../core/app_state.dart';
 import '../core/project_ui.dart';
+import '../l10n/app_localizations.dart';
 import '../models/models.dart';
 import '../widgets/priority_chip.dart';
 import 'task_details_screen.dart';
@@ -20,14 +21,12 @@ class KanbanScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final s = context.watch<AppState>();
+    final l = AppLocalizations.of(context)!;
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-
         title: Text(
-          'Tableau Kanban',
+          l.kanbanBoard,
           style: Theme.of(context).textTheme.titleLarge,
         ),
       ),
@@ -50,6 +49,7 @@ class _Column extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context)!;
     return DragTarget<Task>(
       onWillAcceptWithDetails: (d) => d.data.status != status,
       onAcceptWithDetails: (d) =>
@@ -73,7 +73,7 @@ class _Column extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    taskStatusLabel(status),
+                    taskStatusLabel(status, l),
                     style: const TextStyle(
                       color: AppColors.navy,
                       fontWeight: FontWeight.w800,
@@ -103,10 +103,10 @@ class _Column extends StatelessWidget {
               const SizedBox(height: 12),
               Expanded(
                 child: tasks.isEmpty
-                    ? const Center(
+                    ? Center(
                         child: Text(
-                          'Déposez une tâche ici',
-                          style: TextStyle(
+                          l.dropTaskHere,
+                          style: const TextStyle(
                             color: AppColors.textSoft,
                             fontSize: 12,
                           ),

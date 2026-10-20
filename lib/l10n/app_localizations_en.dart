@@ -292,4 +292,189 @@ class AppLocalizationsEn extends AppLocalizations {
   String lateOn(String date) {
     return 'Overdue · $date';
   }
+
+  @override
+  String get filterAllFem => 'All';
+
+  @override
+  String get taskTodo => 'To do';
+
+  @override
+  String get taskStatusDone => 'Completed';
+
+  @override
+  String get priorityHigh => 'High';
+
+  @override
+  String get priorityMedium => 'Medium';
+
+  @override
+  String get priorityLow => 'Low';
+
+  @override
+  String get kanbanBoard => 'Kanban board';
+
+  @override
+  String get dropTaskHere => 'Drop a task here';
+
+  @override
+  String get noTaskHere => 'No tasks here';
+
+  @override
+  String get createProjectFirst => 'Create a project first.';
+
+  @override
+  String get deletedProject => 'Deleted project';
+
+  @override
+  String projectDateLine(String project, String date) {
+    return '$project · $date';
+  }
+
+  @override
+  String get newTask => 'New task';
+
+  @override
+  String get titleLabel => 'Title';
+
+  @override
+  String get taskTitleHint => 'E.g. UI design';
+
+  @override
+  String get enterTaskTitle => 'Enter the task title.';
+
+  @override
+  String get taskDescHint => 'Briefly describe the task…';
+
+  @override
+  String get projectLabelShort => 'Project';
+
+  @override
+  String get priorityLabel => 'Priority';
+
+  @override
+  String get createTheTask => 'Create task';
+
+  @override
+  String get taskDetail => 'Task details';
+
+  @override
+  String get deleteTaskTitle => 'Delete this task?';
+
+  @override
+  String deleteTaskBody(String title) {
+    return '“$title” will be permanently deleted.';
+  }
+
+  @override
+  String projectNameLine(String name) {
+    return 'Project: $name';
+  }
+
+  @override
+  String get assignedTo => 'Assigned to';
+
+  @override
+  String get unassigned => 'Unassigned';
+
+  @override
+  String get assignTask => 'Assign a task';
+
+  @override
+  String get taskLabel => 'Task';
+
+  @override
+  String get memberLabel => 'Member';
+
+  @override
+  String get addMembersFirst => 'Add members first (Team tab).';
+
+  @override
+  String get assign => 'Assign';
+
+  @override
+  String get noMembersYet => 'No members yet';
+
+  @override
+  String get removeMemberTitle => 'Remove this member?';
+
+  @override
+  String removeMemberBody(String name) {
+    return '“$name” will be removed. Their tasks will become unassigned.';
+  }
+
+  @override
+  String get remove => 'Remove';
+
+  @override
+  String memberRoleTasks(String role, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count tasks',
+      one: '1 task',
+    );
+    return '$role · $_temp0';
+  }
+
+  @override
+  String get projectLead => 'Project lead';
+
+  @override
+  String get newMember => 'New member';
+
+  @override
+  String get memberNameHint => 'E.g. Amina Ben Ali';
+
+  @override
+  String get enterMemberName => 'Enter the member name.';
+
+  @override
+  String get roleLabel => 'Role';
+
+  @override
+  String get roleHint => 'E.g. Front-end developer';
+
+  @override
+  String get enterMemberRole => 'Enter the member role.';
+
+  @override
+  String get addTheMember => 'Add member';
+
+  @override
+  String get deadlinesTitle => 'Deadlines';
+
+  @override
+  String get weekdayMon => 'M';
+
+  @override
+  String get weekdayTue => 'T';
+
+  @override
+  String get weekdayWed => 'W';
+
+  @override
+  String get weekdayThu => 'T';
+
+  @override
+  String get weekdayFri => 'F';
+
+  @override
+  String get weekdaySat => 'S';
+
+  @override
+  String get weekdaySun => 'S';
+
+  @override
+  String todayCount(int count) {
+    return 'Today · $count';
+  }
+
+  @override
+  String dateCount(String date, int count) {
+    return '$date · $count';
+  }
+
+  @override
+  String get noDeadlineThatDay => 'No deadlines that day.';
 }

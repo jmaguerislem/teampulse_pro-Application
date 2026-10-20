@@ -607,6 +607,336 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'En retard · {date}'**
   String lateOn(String date);
+
+  /// No description provided for @filterAllFem.
+  ///
+  /// In fr, this message translates to:
+  /// **'Toutes'**
+  String get filterAllFem;
+
+  /// No description provided for @taskTodo.
+  ///
+  /// In fr, this message translates to:
+  /// **'À faire'**
+  String get taskTodo;
+
+  /// No description provided for @taskStatusDone.
+  ///
+  /// In fr, this message translates to:
+  /// **'Terminée'**
+  String get taskStatusDone;
+
+  /// No description provided for @priorityHigh.
+  ///
+  /// In fr, this message translates to:
+  /// **'Haute'**
+  String get priorityHigh;
+
+  /// No description provided for @priorityMedium.
+  ///
+  /// In fr, this message translates to:
+  /// **'Moyenne'**
+  String get priorityMedium;
+
+  /// No description provided for @priorityLow.
+  ///
+  /// In fr, this message translates to:
+  /// **'Basse'**
+  String get priorityLow;
+
+  /// No description provided for @kanbanBoard.
+  ///
+  /// In fr, this message translates to:
+  /// **'Tableau Kanban'**
+  String get kanbanBoard;
+
+  /// No description provided for @dropTaskHere.
+  ///
+  /// In fr, this message translates to:
+  /// **'Déposez une tâche ici'**
+  String get dropTaskHere;
+
+  /// No description provided for @noTaskHere.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucune tâche ici'**
+  String get noTaskHere;
+
+  /// No description provided for @createProjectFirst.
+  ///
+  /// In fr, this message translates to:
+  /// **'Créez d’abord un projet.'**
+  String get createProjectFirst;
+
+  /// No description provided for @deletedProject.
+  ///
+  /// In fr, this message translates to:
+  /// **'Projet supprimé'**
+  String get deletedProject;
+
+  /// No description provided for @projectDateLine.
+  ///
+  /// In fr, this message translates to:
+  /// **'{project} · {date}'**
+  String projectDateLine(String project, String date);
+
+  /// No description provided for @newTask.
+  ///
+  /// In fr, this message translates to:
+  /// **'Nouvelle tâche'**
+  String get newTask;
+
+  /// No description provided for @titleLabel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Titre'**
+  String get titleLabel;
+
+  /// No description provided for @taskTitleHint.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ex : Conception de l’UI'**
+  String get taskTitleHint;
+
+  /// No description provided for @enterTaskTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Entrez le titre de la tâche.'**
+  String get enterTaskTitle;
+
+  /// No description provided for @taskDescHint.
+  ///
+  /// In fr, this message translates to:
+  /// **'Décrivez brièvement la tâche…'**
+  String get taskDescHint;
+
+  /// No description provided for @projectLabelShort.
+  ///
+  /// In fr, this message translates to:
+  /// **'Projet'**
+  String get projectLabelShort;
+
+  /// No description provided for @priorityLabel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Priorité'**
+  String get priorityLabel;
+
+  /// No description provided for @createTheTask.
+  ///
+  /// In fr, this message translates to:
+  /// **'Créer la tâche'**
+  String get createTheTask;
+
+  /// No description provided for @taskDetail.
+  ///
+  /// In fr, this message translates to:
+  /// **'Détail de la tâche'**
+  String get taskDetail;
+
+  /// No description provided for @deleteTaskTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Supprimer cette tâche ?'**
+  String get deleteTaskTitle;
+
+  /// No description provided for @deleteTaskBody.
+  ///
+  /// In fr, this message translates to:
+  /// **'« {title} » sera supprimée définitivement.'**
+  String deleteTaskBody(String title);
+
+  /// No description provided for @projectNameLine.
+  ///
+  /// In fr, this message translates to:
+  /// **'Projet : {name}'**
+  String projectNameLine(String name);
+
+  /// No description provided for @assignedTo.
+  ///
+  /// In fr, this message translates to:
+  /// **'Assigné à'**
+  String get assignedTo;
+
+  /// No description provided for @unassigned.
+  ///
+  /// In fr, this message translates to:
+  /// **'Non assigné'**
+  String get unassigned;
+
+  /// No description provided for @assignTask.
+  ///
+  /// In fr, this message translates to:
+  /// **'Affecter une tâche'**
+  String get assignTask;
+
+  /// No description provided for @taskLabel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Tâche'**
+  String get taskLabel;
+
+  /// No description provided for @memberLabel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Membre'**
+  String get memberLabel;
+
+  /// No description provided for @addMembersFirst.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ajoutez d’abord des membres (onglet Équipe).'**
+  String get addMembersFirst;
+
+  /// No description provided for @assign.
+  ///
+  /// In fr, this message translates to:
+  /// **'Affecter'**
+  String get assign;
+
+  /// No description provided for @noMembersYet.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucun membre pour le moment'**
+  String get noMembersYet;
+
+  /// No description provided for @removeMemberTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Retirer ce membre ?'**
+  String get removeMemberTitle;
+
+  /// No description provided for @removeMemberBody.
+  ///
+  /// In fr, this message translates to:
+  /// **'« {name} » sera retiré. Ses tâches redeviendront non assignées.'**
+  String removeMemberBody(String name);
+
+  /// No description provided for @remove.
+  ///
+  /// In fr, this message translates to:
+  /// **'Retirer'**
+  String get remove;
+
+  /// No description provided for @memberRoleTasks.
+  ///
+  /// In fr, this message translates to:
+  /// **'{role} · {count, plural, =1{1 tâche} other{{count} tâches}}'**
+  String memberRoleTasks(String role, int count);
+
+  /// No description provided for @projectLead.
+  ///
+  /// In fr, this message translates to:
+  /// **'Cheffe de projet'**
+  String get projectLead;
+
+  /// No description provided for @newMember.
+  ///
+  /// In fr, this message translates to:
+  /// **'Nouveau membre'**
+  String get newMember;
+
+  /// No description provided for @memberNameHint.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ex : Amina Ben Ali'**
+  String get memberNameHint;
+
+  /// No description provided for @enterMemberName.
+  ///
+  /// In fr, this message translates to:
+  /// **'Entrez le nom du membre.'**
+  String get enterMemberName;
+
+  /// No description provided for @roleLabel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Rôle'**
+  String get roleLabel;
+
+  /// No description provided for @roleHint.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ex : Développeuse front'**
+  String get roleHint;
+
+  /// No description provided for @enterMemberRole.
+  ///
+  /// In fr, this message translates to:
+  /// **'Entrez le rôle du membre.'**
+  String get enterMemberRole;
+
+  /// No description provided for @addTheMember.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ajouter le membre'**
+  String get addTheMember;
+
+  /// No description provided for @deadlinesTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Échéances'**
+  String get deadlinesTitle;
+
+  /// No description provided for @weekdayMon.
+  ///
+  /// In fr, this message translates to:
+  /// **'L'**
+  String get weekdayMon;
+
+  /// No description provided for @weekdayTue.
+  ///
+  /// In fr, this message translates to:
+  /// **'M'**
+  String get weekdayTue;
+
+  /// No description provided for @weekdayWed.
+  ///
+  /// In fr, this message translates to:
+  /// **'M'**
+  String get weekdayWed;
+
+  /// No description provided for @weekdayThu.
+  ///
+  /// In fr, this message translates to:
+  /// **'J'**
+  String get weekdayThu;
+
+  /// No description provided for @weekdayFri.
+  ///
+  /// In fr, this message translates to:
+  /// **'V'**
+  String get weekdayFri;
+
+  /// No description provided for @weekdaySat.
+  ///
+  /// In fr, this message translates to:
+  /// **'S'**
+  String get weekdaySat;
+
+  /// No description provided for @weekdaySun.
+  ///
+  /// In fr, this message translates to:
+  /// **'D'**
+  String get weekdaySun;
+
+  /// No description provided for @todayCount.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aujourd’hui · {count}'**
+  String todayCount(int count);
+
+  /// No description provided for @dateCount.
+  ///
+  /// In fr, this message translates to:
+  /// **'{date} · {count}'**
+  String dateCount(String date, int count);
+
+  /// No description provided for @noDeadlineThatDay.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucune échéance ce jour-là.'**
+  String get noDeadlineThatDay;
 }
 
 class _AppLocalizationsDelegate
