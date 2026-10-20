@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../core/app_colors.dart';
-import '../core/app_state.dart';
-import '../core/user_session.dart';
-import '../l10n/app_localizations.dart';
-import 'deadlines_screen.dart';
-import 'profile/profile_screen.dart';
+import '../../core/app_colors.dart';
+import '../../core/app_state.dart';
+import '../../core/user_session.dart';
+import '../../l10n/app_localizations.dart';
+import '../team/deadlines_screen.dart';
+import '../profile/profile_screen.dart';
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});

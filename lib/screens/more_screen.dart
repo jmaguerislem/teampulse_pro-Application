@@ -4,10 +4,10 @@ import 'package:provider/provider.dart';
 import '../core/app_colors.dart';
 import '../core/app_state.dart';
 import '../l10n/app_localizations.dart';
-import 'notifications_screen.dart';
+import 'notifications/notifications_screen.dart';
 import 'profile/profile_screen.dart';
-import 'progress_screen.dart';
-import 'reports_screen.dart';
+import 'notifications/progress_screen.dart';
+import 'notifications/reports_screen.dart';
 
 class MoreScreen extends StatelessWidget {
   const MoreScreen({super.key});

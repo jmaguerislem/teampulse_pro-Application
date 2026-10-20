@@ -5,7 +5,7 @@ import '../../core/app_colors.dart';
 import '../../core/settings_state.dart';
 import '../../core/user_session.dart';
 import '../../l10n/app_localizations.dart';
-import '../welcome_screen.dart';
+import '../auth/welcome_screen.dart';
 import 'appearance_screen.dart';
 import 'change_password_screen.dart';
 import 'edit_profile_screen.dart';

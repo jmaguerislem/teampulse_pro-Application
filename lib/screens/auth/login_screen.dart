@@ -1,24 +1,22 @@
 import 'package:flutter/material.dart';
 
-import '../core/app_colors.dart';
-import '../core/auth_service.dart';
-import '../core/user_session.dart';
-import '../l10n/app_localizations.dart';
-import '../widgets/primary_button.dart';
-import 'login_screen.dart';
-import 'main_shell.dart';
-import '../core/project_ui.dart';
+import '../../core/app_colors.dart';
+import '../../core/auth_service.dart';
+import '../../core/user_session.dart';
+import '../../l10n/app_localizations.dart';
+import '../../widgets/primary_button.dart';
+import '../dashboard/main_shell.dart';
+import 'signup_screen.dart';
 
-class SignupScreen extends StatefulWidget {
-  const SignupScreen({super.key});
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
 
   @override
-  State<SignupScreen> createState() => _SignupScreenState();
+  State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _SignupScreenState extends State<SignupScreen> {
+class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
-  final _nameController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   bool _hidePassword = true;
@@ -26,7 +24,6 @@ class _SignupScreenState extends State<SignupScreen> {
 
   @override
   void dispose() {
-    _nameController.dispose();
     _emailController.dispose();
     _passwordController.dispose();
     super.dispose();
@@ -45,24 +42,22 @@ class _SignupScreenState extends State<SignupScreen> {
   );
 
   void _submit() {
+    final l = AppLocalizations.of(context)!;
     setState(() => _error = null);
     if (!_formKey.currentState!.validate()) return;
 
-    final error = AuthService.register(
-      fullName: _nameController.text,
-      email: _emailController.text,
-      password: _passwordController.text,
+    final account = AuthService.login(
+      _emailController.text,
+      _passwordController.text,
     );
 
-    if (error != null) {
-      setState(
-        () => _error = authErrorText(error, AppLocalizations.of(context)!),
-      );
+    if (account == null) {
+      setState(() => _error = l.wrongCredentials);
       return;
     }
 
-    UserSession.fullName = _nameController.text.trim();
-    UserSession.email = _emailController.text.trim().toLowerCase();
+    UserSession.fullName = account.fullName;
+    UserSession.email = account.email;
     Navigator.pushAndRemoveUntil(
       context,
       MaterialPageRoute(builder: (_) => const MainShell()),
@@ -84,21 +79,13 @@ class _SignupScreenState extends State<SignupScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                l.signupTitle,
+                l.loginTitle,
                 style: Theme.of(context).textTheme.headlineLarge,
               ),
               const SizedBox(height: 8),
               Text(
-                l.signupSubtitle,
+                l.loginSubtitle,
                 style: Theme.of(context).textTheme.bodyMedium,
-              ),
-              _label(l.fullNameLabel),
-              TextFormField(
-                controller: _nameController,
-                textCapitalization: TextCapitalization.words,
-                decoration: InputDecoration(hintText: l.fullNameHint),
-                validator: (v) =>
-                    (v == null || v.trim().isEmpty) ? l.enterFullName : null,
               ),
               _label(l.emailLabel),
               TextFormField(
@@ -116,7 +103,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 controller: _passwordController,
                 obscureText: _hidePassword,
                 decoration: InputDecoration(
-                  hintText: l.passwordMinHint,
+                  hintText: l.yourPasswordHint,
                   suffixIcon: IconButton(
                     icon: Icon(
                       _hidePassword ? Icons.visibility_off : Icons.visibility,
@@ -127,7 +114,7 @@ class _SignupScreenState extends State<SignupScreen> {
                   ),
                 ),
                 validator: (v) =>
-                    (v == null || v.length < 8) ? l.passwordMinError : null,
+                    (v == null || v.isEmpty) ? l.enterPassword : null,
               ),
               if (_error != null) ...[
                 const SizedBox(height: 16),
@@ -152,21 +139,21 @@ class _SignupScreenState extends State<SignupScreen> {
                 ),
               ],
               const SizedBox(height: 28),
-              PrimaryButton(label: l.signUp, onPressed: _submit),
+              PrimaryButton(label: l.signIn, onPressed: _submit),
               const SizedBox(height: 20),
               Center(
                 child: GestureDetector(
                   onTap: () => Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (_) => const LoginScreen()),
+                    MaterialPageRoute(builder: (_) => const SignupScreen()),
                   ),
                   child: Text.rich(
                     TextSpan(
-                      text: l.alreadyAccount,
+                      text: l.noAccountYet,
                       style: const TextStyle(color: AppColors.textSoft),
                       children: [
                         TextSpan(
-                          text: l.signIn,
+                          text: l.createAccount,
                           style: const TextStyle(
                             color: AppColors.primary,
                             fontWeight: FontWeight.w700,

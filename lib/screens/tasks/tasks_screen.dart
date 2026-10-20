@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../core/app_colors.dart';
-import '../core/app_state.dart';
-import '../core/project_ui.dart';
-import '../l10n/app_localizations.dart';
-import '../models/models.dart';
-import '../widgets/priority_chip.dart';
+import '../../core/app_colors.dart';
+import '../../core/app_state.dart';
+import '../../core/project_ui.dart';
+import '../../l10n/app_localizations.dart';
+import '../../models/models.dart';
+import '../../widgets/priority_chip.dart';
 import 'create_task_screen.dart';
 import 'kanban_screen.dart';
 import 'task_details_screen.dart';

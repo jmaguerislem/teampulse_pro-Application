@@ -1,22 +1,24 @@
 import 'package:flutter/material.dart';
 
-import '../core/app_colors.dart';
-import '../core/auth_service.dart';
-import '../core/user_session.dart';
-import '../l10n/app_localizations.dart';
-import '../widgets/primary_button.dart';
-import 'main_shell.dart';
-import 'signup_screen.dart';
+import '../../core/app_colors.dart';
+import '../../core/auth_service.dart';
+import '../../core/user_session.dart';
+import '../../l10n/app_localizations.dart';
+import '../../widgets/primary_button.dart';
+import 'login_screen.dart';
+import '../dashboard/main_shell.dart';
+import '../../core/project_ui.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class SignupScreen extends StatefulWidget {
+  const SignupScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<SignupScreen> createState() => _SignupScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _SignupScreenState extends State<SignupScreen> {
   final _formKey = GlobalKey<FormState>();
+  final _nameController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   bool _hidePassword = true;
@@ -24,6 +26,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   void dispose() {
+    _nameController.dispose();
     _emailController.dispose();
     _passwordController.dispose();
     super.dispose();
@@ -42,22 +45,24 @@ class _LoginScreenState extends State<LoginScreen> {
   );
 
   void _submit() {
-    final l = AppLocalizations.of(context)!;
     setState(() => _error = null);
     if (!_formKey.currentState!.validate()) return;
 
-    final account = AuthService.login(
-      _emailController.text,
-      _passwordController.text,
+    final error = AuthService.register(
+      fullName: _nameController.text,
+      email: _emailController.text,
+      password: _passwordController.text,
     );
 
-    if (account == null) {
-      setState(() => _error = l.wrongCredentials);
+    if (error != null) {
+      setState(
+        () => _error = authErrorText(error, AppLocalizations.of(context)!),
+      );
       return;
     }
 
-    UserSession.fullName = account.fullName;
-    UserSession.email = account.email;
+    UserSession.fullName = _nameController.text.trim();
+    UserSession.email = _emailController.text.trim().toLowerCase();
     Navigator.pushAndRemoveUntil(
       context,
       MaterialPageRoute(builder: (_) => const MainShell()),
@@ -79,13 +84,21 @@ class _LoginScreenState extends State<LoginScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                l.loginTitle,
+                l.signupTitle,
                 style: Theme.of(context).textTheme.headlineLarge,
               ),
               const SizedBox(height: 8),
               Text(
-                l.loginSubtitle,
+                l.signupSubtitle,
                 style: Theme.of(context).textTheme.bodyMedium,
+              ),
+              _label(l.fullNameLabel),
+              TextFormField(
+                controller: _nameController,
+                textCapitalization: TextCapitalization.words,
+                decoration: InputDecoration(hintText: l.fullNameHint),
+                validator: (v) =>
+                    (v == null || v.trim().isEmpty) ? l.enterFullName : null,
               ),
               _label(l.emailLabel),
               TextFormField(
@@ -103,7 +116,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 controller: _passwordController,
                 obscureText: _hidePassword,
                 decoration: InputDecoration(
-                  hintText: l.yourPasswordHint,
+                  hintText: l.passwordMinHint,
                   suffixIcon: IconButton(
                     icon: Icon(
                       _hidePassword ? Icons.visibility_off : Icons.visibility,
@@ -114,7 +127,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 validator: (v) =>
-                    (v == null || v.isEmpty) ? l.enterPassword : null,
+                    (v == null || v.length < 8) ? l.passwordMinError : null,
               ),
               if (_error != null) ...[
                 const SizedBox(height: 16),
@@ -139,21 +152,21 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ],
               const SizedBox(height: 28),
-              PrimaryButton(label: l.signIn, onPressed: _submit),
+              PrimaryButton(label: l.signUp, onPressed: _submit),
               const SizedBox(height: 20),
               Center(
                 child: GestureDetector(
                   onTap: () => Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (_) => const SignupScreen()),
+                    MaterialPageRoute(builder: (_) => const LoginScreen()),
                   ),
                   child: Text.rich(
                     TextSpan(
-                      text: l.noAccountYet,
+                      text: l.alreadyAccount,
                       style: const TextStyle(color: AppColors.textSoft),
                       children: [
                         TextSpan(
-                          text: l.createAccount,
+                          text: l.signIn,
                           style: const TextStyle(
                             color: AppColors.primary,
                             fontWeight: FontWeight.w700,

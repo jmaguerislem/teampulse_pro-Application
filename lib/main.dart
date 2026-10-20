@@ -4,7 +4,7 @@ import 'core/app_state.dart';
 import 'core/app_theme.dart';
 import 'core/settings_state.dart';
 import 'l10n/app_localizations.dart';
-import 'screens/welcome_screen.dart';
+import 'screens/auth/welcome_screen.dart';
 
 void main() => runApp(
       MultiProvider(

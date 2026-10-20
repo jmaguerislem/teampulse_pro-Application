@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:teampulse_pro/main.dart';
-import 'package:teampulse_pro/screens/welcome_screen.dart';
+import 'package:teampulse_pro/screens/auth/welcome_screen.dart';
 
 void main() {
   testWidgets('Affiche l\'écran d\'accueil', (WidgetTester tester) async {

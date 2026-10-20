@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../core/app_colors.dart';
-import '../core/app_state.dart';
-import '../l10n/app_localizations.dart';
-import '../widgets/primary_button.dart';
+import '../../core/app_colors.dart';
+import '../../core/app_state.dart';
+import '../../l10n/app_localizations.dart';
+import '../../widgets/primary_button.dart';
 
 class ReportsScreen extends StatefulWidget {
   const ReportsScreen({super.key});

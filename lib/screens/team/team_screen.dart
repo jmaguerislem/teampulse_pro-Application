@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../core/app_colors.dart';
-import '../core/app_state.dart';
-import '../l10n/app_localizations.dart';
-import '../models/models.dart';
-import '../widgets/member_avatar.dart';
+import '../../core/app_colors.dart';
+import '../../core/app_state.dart';
+import '../../l10n/app_localizations.dart';
+import '../../models/models.dart';
+import '../../widgets/member_avatar.dart';
 import 'add_member_screen.dart';
 
 class TeamScreen extends StatelessWidget {

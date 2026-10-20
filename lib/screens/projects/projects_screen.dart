@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../core/app_colors.dart';
-import '../core/app_state.dart';
-import '../core/project_ui.dart';
-import '../l10n/app_localizations.dart';
-import '../models/models.dart';
+import '../../core/app_colors.dart';
+import '../../core/app_state.dart';
+import '../../core/project_ui.dart';
+import '../../l10n/app_localizations.dart';
+import '../../models/models.dart';
 import 'create_project_screen.dart';
 import 'project_details_screen.dart';
 

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-import '../widgets/app_bottom_nav.dart';
+import '../../widgets/app_bottom_nav.dart';
 import 'dashboard_screen.dart';
-import 'more_screen.dart';
-import 'projects_screen.dart';
-import 'tasks_screen.dart';
-import 'team_screen.dart';
+import '../more_screen.dart';
+import '../projects/projects_screen.dart';
+import '../tasks/tasks_screen.dart';
+import '../team/team_screen.dart';
 
 class MainShell extends StatefulWidget {
   const MainShell({super.key});

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../core/app_colors.dart';
-import '../core/app_state.dart';
-import '../core/project_ui.dart';
-import '../l10n/app_localizations.dart';
-import '../models/models.dart';
-import '../widgets/priority_chip.dart';
-import 'assign_task_screen.dart';
+import '../../core/app_colors.dart';
+import '../../core/app_state.dart';
+import '../../core/project_ui.dart';
+import '../../l10n/app_localizations.dart';
+import '../../models/models.dart';
+import '../../widgets/priority_chip.dart';
+import '../team/assign_task_screen.dart';
 
 class TaskDetailsScreen extends StatelessWidget {
   final String taskId;

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../core/app_colors.dart';
-import '../core/app_state.dart';
-import '../core/project_ui.dart';
-import '../l10n/app_localizations.dart';
-import '../models/models.dart';
-import '../widgets/member_avatar.dart';
-import 'create_task_screen.dart';
+import '../../core/app_colors.dart';
+import '../../core/app_state.dart';
+import '../../core/project_ui.dart';
+import '../../l10n/app_localizations.dart';
+import '../../models/models.dart';
+import '../../widgets/member_avatar.dart';
+import '../tasks/create_task_screen.dart';
 
 class ProjectDetailsScreen extends StatefulWidget {
   final String projectId;

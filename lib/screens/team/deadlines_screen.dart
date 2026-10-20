@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../core/app_colors.dart';
-import '../core/app_state.dart';
-import '../l10n/app_localizations.dart';
-import '../widgets/priority_chip.dart';
-import 'task_details_screen.dart';
+import '../../core/app_colors.dart';
+import '../../core/app_state.dart';
+import '../../l10n/app_localizations.dart';
+import '../../widgets/priority_chip.dart';
+import '../tasks/task_details_screen.dart';
 
 class DeadlinesScreen extends StatefulWidget {
   const DeadlinesScreen({super.key});

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../core/app_colors.dart';
-import '../core/app_state.dart';
-import '../core/settings_state.dart';
-import '../l10n/app_localizations.dart';
-import '../models/notification_item.dart';
-import 'task_details_screen.dart';
+import '../../core/app_colors.dart';
+import '../../core/app_state.dart';
+import '../../core/settings_state.dart';
+import '../../l10n/app_localizations.dart';
+import '../../models/notification_item.dart';
+import '../tasks/task_details_screen.dart';
 
 class NotificationsScreen extends StatefulWidget {
   const NotificationsScreen({super.key});
