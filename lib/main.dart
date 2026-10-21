@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import 'core/app_state.dart';
 import 'core/app_theme.dart';
 import 'core/settings_state.dart';
@@ -7,14 +8,14 @@ import 'l10n/app_localizations.dart';
 import 'screens/auth/welcome_screen.dart';
 
 void main() => runApp(
-      MultiProvider(
-        providers: [
-          ChangeNotifierProvider(create: (_) => AppState()),
-          ChangeNotifierProvider(create: (_) => SettingsState()),
-        ],
-        child: const TeamPulseApp(),
-      ),
-    );
+  MultiProvider(
+    providers: [
+      ChangeNotifierProvider(create: (_) => AppState()),
+      ChangeNotifierProvider(create: (_) => SettingsState()),
+    ],
+    child: const TeamPulseApp(),
+  ),
+);
 
 class TeamPulseApp extends StatelessWidget {
   const TeamPulseApp({super.key});

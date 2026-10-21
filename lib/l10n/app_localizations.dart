@@ -1430,18 +1430,6 @@ abstract class AppLocalizations {
   /// **'Tâches assignées à un membre'**
   String get prefAssignSub;
 
-  /// No description provided for @languageComingSoon.
-  ///
-  /// In fr, this message translates to:
-  /// **'Cette langue arrive bientôt.'**
-  String get languageComingSoon;
-
-  /// No description provided for @comingSoonShort.
-  ///
-  /// In fr, this message translates to:
-  /// **'Bientôt'**
-  String get comingSoonShort;
-
   /// No description provided for @themeLight.
   ///
   /// In fr, this message translates to:

@@ -757,12 +757,6 @@ class AppLocalizationsFr extends AppLocalizations {
   String get prefAssignSub => 'Tâches assignées à un membre';
 
   @override
-  String get languageComingSoon => 'Cette langue arrive bientôt.';
-
-  @override
-  String get comingSoonShort => 'Bientôt';
-
-  @override
   String get themeLight => 'Clair';
 
   @override

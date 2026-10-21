@@ -1,5 +1,4 @@
 import 'package:flutter/foundation.dart';
-
 import '../models/models.dart';
 import '../models/notification_item.dart';
 
@@ -31,10 +30,6 @@ class AppState extends ChangeNotifier {
   final List<Member> _members = [];
   final Set<String> _readNotifs = {};
 
-  AppState({bool withDemoData = true}) {
-    if (withDemoData) _seedDemo();
-  }
-
   List<Project> get projects => List.unmodifiable(_projects);
   List<Task> get tasks => List.unmodifiable(_tasks);
   List<Member> get members => List.unmodifiable(_members);
@@ -47,7 +42,8 @@ class AppState extends ChangeNotifier {
       _projects.where((p) => p.status == ProjectStatus.done).length;
 
   int get taskCount => _tasks.length;
-  int get tasksDone => _tasks.where((t) => t.status == TaskStatus.done).length;
+  int get tasksDone =>
+      _tasks.where((t) => t.status == TaskStatus.done).length;
   int get tasksLate => _tasks.where((t) => t.isLate).length;
   int get tasksActive => taskCount - tasksDone - tasksLate;
 
@@ -64,8 +60,9 @@ class AppState extends ChangeNotifier {
   List<Task> tasksOf(String projectId) =>
       _tasks.where((t) => t.projectId == projectId).toList();
 
-  int tasksDoneOf(String projectId) =>
-      tasksOf(projectId).where((t) => t.status == TaskStatus.done).length;
+  int tasksDoneOf(String projectId) => tasksOf(projectId)
+      .where((t) => t.status == TaskStatus.done)
+      .length;
 
   int tasksLateOf(String projectId) =>
       tasksOf(projectId).where((t) => t.isLate).length;
@@ -83,9 +80,8 @@ class AppState extends ChangeNotifier {
   }
 
   List<Project> get upcomingProjects {
-    final list = _projects
-        .where((p) => p.status != ProjectStatus.done)
-        .toList();
+    final list =
+        _projects.where((p) => p.status != ProjectStatus.done).toList();
     list.sort((a, b) => a.deadline.compareTo(b.deadline));
     return list.take(2).toList();
   }
@@ -102,12 +98,10 @@ class AppState extends ChangeNotifier {
       _tasks.where((t) => t.assignee == memberId).length;
 
   List<Task> tasksOnDay(DateTime day) => _tasks
-      .where(
-        (t) =>
-            t.dueDate.year == day.year &&
-            t.dueDate.month == day.month &&
-            t.dueDate.day == day.day,
-      )
+      .where((t) =>
+          t.dueDate.year == day.year &&
+          t.dueDate.month == day.month &&
+          t.dueDate.day == day.day)
       .toList();
 
   // ---------- Notifications (générées automatiquement) ----------
@@ -122,39 +116,33 @@ class AppState extends ChangeNotifier {
       final diff = due.difference(today).inDays;
 
       if (diff < 0) {
-        list.add(
-          AppNotification(
-            id: 'overdue_${t.id}',
-            type: NotifType.overdue,
-            taskId: t.id,
-            taskTitle: t.title,
-            days: -diff,
-          ),
-        );
+        list.add(AppNotification(
+          id: 'overdue_${t.id}',
+          type: NotifType.overdue,
+          taskId: t.id,
+          taskTitle: t.title,
+          days: -diff,
+        ));
       } else if (diff <= 2) {
-        list.add(
-          AppNotification(
-            id: 'reminder_${t.id}',
-            type: NotifType.reminder,
-            taskId: t.id,
-            taskTitle: t.title,
-            days: diff,
-          ),
-        );
+        list.add(AppNotification(
+          id: 'reminder_${t.id}',
+          type: NotifType.reminder,
+          taskId: t.id,
+          taskTitle: t.title,
+          days: diff,
+        ));
       }
 
       if (t.assignee != null) {
         final m = memberById(t.assignee!);
         if (m != null) {
-          list.add(
-            AppNotification(
-              id: 'assign_${t.id}_${m.id}',
-              type: NotifType.assignment,
-              taskId: t.id,
-              taskTitle: t.title,
-              memberName: m.name,
-            ),
-          );
+          list.add(AppNotification(
+            id: 'assign_${t.id}_${m.id}',
+            type: NotifType.assignment,
+            taskId: t.id,
+            taskTitle: t.title,
+            memberName: m.name,
+          ));
         }
       }
     }
@@ -191,8 +179,7 @@ class AppState extends ChangeNotifier {
 
       for (final t in _tasks) {
         if (!t.createdAt.isBefore(end)) continue;
-        final completed =
-            t.status == TaskStatus.done &&
+        final completed = t.status == TaskStatus.done &&
             t.completedAt != null &&
             t.completedAt!.isBefore(end);
         if (completed) {
@@ -300,97 +287,5 @@ class AppState extends ChangeNotifier {
     if (t == null) return;
     t.assignee = memberId;
     notifyListeners();
-  }
-
-  // ---------- Données de démonstration ----------
-  void _seedDemo() {
-    final now = DateTime.now();
-    DateTime ago(int d) => now.subtract(Duration(days: d));
-    DateTime inDays(int d) => now.add(Duration(days: d));
-
-    _members.addAll([
-      Member(
-        id: 'm1',
-        name: 'Amina Ben Ali',
-        role: 'Développeuse front',
-        isLead: true,
-      ),
-      Member(id: 'm2', name: 'Sofiane Trabelsi', role: 'Développeur back'),
-      Member(id: 'm3', name: 'Ines Khalfaoui', role: 'UX/UI Designer'),
-      Member(id: 'm4', name: 'Rami Mzoughi', role: 'Full stack'),
-      Member(id: 'm5', name: 'Lina Gharbi', role: 'QA Tester'),
-    ]);
-
-    _projects.addAll([
-      Project(
-        id: 'p1',
-        name: 'Application mobile',
-        description: 'Développement d\'une application mobile pour gérer les projets et les équipes.',
-        startDate: ago(30),
-        deadline: inDays(1),
-      ),
-      Project(
-        id: 'p2',
-        name: 'Site web client',
-        description: 'Refonte du site vitrine du client.',
-        startDate: ago(20),
-        deadline: inDays(9),
-      ),
-    ]);
-
-    _tasks.addAll([
-      Task(
-        id: 't1',
-        projectId: 'p1',
-        title: 'Conception de l\'UI',
-        dueDate: ago(2),
-        status: TaskStatus.done,
-        assignee: 'm1',
-        createdAt: ago(14),
-        completedAt: ago(3),
-      ),
-      Task(
-        id: 't2',
-        projectId: 'p1',
-        title: 'Base de données',
-        dueDate: ago(1),
-        assignee: 'm2',
-        createdAt: ago(12),
-      ),
-      Task(
-        id: 't3',
-        projectId: 'p1',
-        title: 'Authentification',
-        dueDate: inDays(1),
-        status: TaskStatus.inProgress,
-        assignee: 'm3',
-        createdAt: ago(8),
-      ),
-      Task(
-        id: 't4',
-        projectId: 'p2',
-        title: 'Maquettes',
-        dueDate: inDays(5),
-        status: TaskStatus.done,
-        assignee: 'm3',
-        createdAt: ago(10),
-        completedAt: ago(4),
-      ),
-      Task(
-        id: 't5',
-        projectId: 'p2',
-        title: 'Intégration',
-        dueDate: inDays(9),
-        createdAt: ago(5),
-      ),
-      Task(
-        id: 't6',
-        projectId: 'p1',
-        title: 'Tests et validation',
-        dueDate: ago(2),
-        priority: TaskPriority.low,
-        createdAt: ago(6),
-      ),
-    ]);
   }
 }

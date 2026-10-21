@@ -8,11 +8,7 @@ import '../../l10n/app_localizations.dart';
 class LanguageScreen extends StatelessWidget {
   const LanguageScreen({super.key});
 
-  static const _languages = [
-    ('Français', true),
-    ('English', true),
-    ('العربية', false),
-  ];
+  static const _languages = ['Français', 'English'];
 
   @override
   Widget build(BuildContext context) {
@@ -28,19 +24,10 @@ class LanguageScreen extends StatelessWidget {
       ),
       body: ListView(
         padding: const EdgeInsets.fromLTRB(20, 8, 20, 32),
-        children: _languages.map((entry) {
-          final (name, available) = entry;
+        children: _languages.map((name) {
           final selected = s.language == name;
           return GestureDetector(
-            onTap: () {
-              if (!available) {
-                ScaffoldMessenger.of(
-                  context,
-                ).showSnackBar(SnackBar(content: Text(l.languageComingSoon)));
-                return;
-              }
-              context.read<SettingsState>().setLanguage(name);
-            },
+            onTap: () => context.read<SettingsState>().setLanguage(name),
             child: Container(
               margin: const EdgeInsets.only(bottom: 10),
               padding: const EdgeInsets.all(18),
@@ -57,21 +44,13 @@ class LanguageScreen extends StatelessWidget {
                   Expanded(
                     child: Text(
                       name,
-                      style: TextStyle(
-                        color: available ? AppColors.navy : AppColors.textSoft,
+                      style: const TextStyle(
+                        color: AppColors.navy,
                         fontWeight: FontWeight.w700,
                         fontSize: 15,
                       ),
                     ),
                   ),
-                  if (!available)
-                    Text(
-                      l.comingSoonShort,
-                      style: const TextStyle(
-                        color: AppColors.textSoft,
-                        fontSize: 12,
-                      ),
-                    ),
                   if (selected)
                     const Icon(Icons.check, color: AppColors.primary),
                 ],
